@@ -55,7 +55,7 @@ function UserProvider({ children, user }) {
     [data, update]
   );
 
-  return <UserContext.Provider value={value}>{data.name ? children : <UserUpdateName />}</UserContext.Provider>;
+  return <UserContext.Provider value={value}>{data?.name ? children : <UserUpdateName />}</UserContext.Provider>;
 }
 function useUser() {
   const context = React.useContext(UserContext);

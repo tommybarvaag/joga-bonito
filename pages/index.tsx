@@ -9,7 +9,7 @@ const Home = ({ cageballData }: { cageballData: { [key: string]: CageballInstanc
 
   return (
     <div>
-      <h1>{user ? `Hi ${user.name}` : "Click button below to login"}</h1>
+      <h1>{user ? `Hi ${user?.name}` : "Click button below to login"}</h1>
       {user ? <button onClick={() => signOut()}>Logout</button> : <button onClick={() => signIn()}>Login</button>}
       {cageballData &&
         Object.entries(cageballData).map(([cageballDate, instance], index) => (
