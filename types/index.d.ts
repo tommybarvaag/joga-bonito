@@ -11,12 +11,12 @@ export type User = {
   isAdmin: boolean;
 };
 
-export interface CageballResponse {
+export type CageballResponse = {
   data: CageballData[];
   meta: CageballMeta;
-}
+};
 
-export interface CageballData {
+export type CageballData = {
   available: boolean;
   bookable: boolean;
   bookings: number;
@@ -28,12 +28,12 @@ export interface CageballData {
   resource: CageballCategory;
   studio: CageballCategory;
   to: Date;
-}
+};
 
-export interface CageballCategory {
+export type CageballCategory = {
   id: number;
   name: CageballName;
-}
+};
 
 export enum CageballName {
   Cageball = "Cageball",
@@ -43,7 +43,7 @@ export enum CageballName {
   Sport1Banen = "Sport 1 banen",
 }
 
-export interface CageballInstance {
+export type CageballInstance = {
   booking_id: null;
   category_name: CageballName;
   from: Date;
@@ -52,8 +52,8 @@ export interface CageballInstance {
   studio_name: CageballName;
   to: Date;
   user_status: null;
-}
+};
 
-export interface CageballMeta {
+export type CageballMeta = {
   hits: number;
-}
+};
