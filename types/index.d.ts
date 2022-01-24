@@ -3,6 +3,14 @@ type JSONResponse<T> = {
   errors?: Array<{ message: string }>;
 };
 
+export type User = {
+  id: string;
+  name?: string;
+  email?: string;
+  image?: string;
+  isAdmin: boolean;
+};
+
 export interface CageballResponse {
   data: CageballData[];
   meta: CageballMeta;
