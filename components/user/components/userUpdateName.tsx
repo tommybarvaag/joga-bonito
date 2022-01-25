@@ -2,7 +2,7 @@ import { useUser } from "@/components/user";
 import * as React from "react";
 
 const UserUpdateName = () => {
-  const { user, update } = useUser();
+  const { update } = useUser();
   const [name, setName] = React.useState("");
 
   return (
@@ -15,7 +15,7 @@ const UserUpdateName = () => {
           e.preventDefault();
 
           // Update user state
-          await update({ name });
+          await update({ name }, true);
         }}
       >
         <fieldset>

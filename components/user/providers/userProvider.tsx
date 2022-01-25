@@ -2,12 +2,11 @@ import { UserUpdateName } from "@/components/user";
 import type { User } from "@/types";
 import { fetcher } from "@/utils/fetcher";
 import * as React from "react";
-import { useDebounce } from "react-use";
 import useSWR from "swr";
 
 type UserContextProps = {
   user: User;
-  update: (updatedUser: Partial<User>) => Promise<void>;
+  update: (updatedUser: Partial<User>, commit?: boolean) => Promise<void>;
   isLoadingUser: boolean;
 };
 
@@ -19,29 +18,25 @@ function UserProvider({ children, user }) {
     revalidateOnMount: true,
   });
 
-  useDebounce(
-    async () => {
-      await fetch(`/api/user/${data.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-    },
-    1000,
-    [data]
-  );
-
   const update = React.useCallback(
-    async (updatedUser: Partial<User>) => {
-      await mutate(
+    async (updatedUser: Partial<User>, commit: boolean = false) => {
+      const updatedUserData = await mutate(
         (user: User) => ({
           ...user,
           ...updatedUser,
         }),
         false
       );
+
+      if (commit) {
+        await fetch(`/api/user/${updatedUserData.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUserData),
+        });
+      }
     },
     [mutate]
   );
