@@ -1,12 +1,12 @@
+import { startOfWeek } from "date-fns";
 export const formatYmd = (date: Date): string => date.toISOString().slice(0, 10);
 
 export const dateNextWeek = (dayOfWeek: number): Date => {
-  var now = new Date();
+  const date = new Date();
+  const monday = startOfWeek(date, { weekStartsOn: 1 });
+  monday.setDate(monday.getDate() + 7 + dayOfWeek);
 
-  var result = new Date(now.getFullYear(), now.getMonth(), now.getDate() + ((7 + dayOfWeek - now.getDay()) % 7), 1, 0);
-  result.setDate(result.getDate() + 7);
-
-  return result;
+  return monday;
 };
 
 export const formatFull = (date: Date, locale: string = "nb-NO"): string =>
