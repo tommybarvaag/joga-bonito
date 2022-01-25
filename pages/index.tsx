@@ -22,6 +22,17 @@ const Home = ({ cageballData }: { cageballData: CageballDate[] }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/api/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       session: await getSession(context),
