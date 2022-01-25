@@ -44,6 +44,19 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  votes         Vote[]
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  dateVoted String
+  userId    String
+  createdAt DateTime
+  updatedAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([dateVoted, userId])
 }
 
 model VerificationToken {

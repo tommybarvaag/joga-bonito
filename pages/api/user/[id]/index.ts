@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import type { UserVote } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
@@ -19,6 +20,9 @@ export default async function User(req: NextApiRequest, res: NextApiResponse) {
     where: {
       id: id as string,
     },
+    include: {
+      votes: true,
+    },
   });
 
   if (!user) {
@@ -30,10 +34,30 @@ export default async function User(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "PUT" && req.body) {
+    const { votes: updatedVotes, ...updatedUser }: { votes: UserVote[] } = req.body;
+    const { votes: oldVotes, ...oldUser } = user;
+
+    const votesToCreate = (updatedVotes ?? []).filter((a: UserVote) => !oldVotes.some((b) => a.dateVoted === b.dateVoted));
+
     await prisma.user.update({
       data: {
-        ...user,
-        ...req.body,
+        ...oldUser,
+        ...updatedUser,
+        votes: {
+          createMany: {
+            data: votesToCreate.map((vote) => ({
+              dateVoted: vote.dateVoted,
+              updatedAt: new Date(),
+              createdAt: new Date(),
+            })),
+          },
+          deleteMany: {
+            dateVoted: {
+              notIn: updatedVotes.map((vote) => vote.dateVoted),
+            },
+            userId: user.id,
+          },
+        },
       },
       where: {
         id: id as string,

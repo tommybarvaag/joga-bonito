@@ -1,3 +1,5 @@
-import UserUpdateName from "@/components/user/components/userUpdateName";
+import UserUpdateName from "./userUpdateName";
+import UserVote from "./userVote";
+import UserVotes from "./userVotes";
 
-export { UserUpdateName };
+export { UserUpdateName, UserVote, UserVotes };

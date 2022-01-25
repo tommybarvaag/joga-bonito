@@ -3,12 +3,20 @@ type JSONResponse<T> = {
   errors?: Array<{ message: string }>;
 };
 
+export type UserVote = {
+  dateVoted: string;
+  userId: string;
+  created: string;
+  updated: string;
+};
+
 export type User = {
   id: string;
   name?: string;
   email?: string;
   image?: string;
   isAdmin: boolean;
+  votes: UserVote[];
 };
 
 export type CageballResponse = {
@@ -58,8 +66,15 @@ export type CageballMeta = {
   hits: number;
 };
 
+export type CageballVote = {
+  user: User;
+  created: string;
+  updated: string;
+};
+
 export type CageballDate = {
   from: Date;
   to: Date;
   formattedToFromDate: string;
+  votes: CageballVote[];
 };

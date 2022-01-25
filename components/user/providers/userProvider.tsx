@@ -1,8 +1,19 @@
 import { UserUpdateName } from "@/components/user";
 import type { User } from "@/types";
 import { fetcher } from "@/utils/fetcher";
+import debounce from "lodash.debounce";
 import * as React from "react";
 import useSWR from "swr";
+
+const commitUserToDatabase = async (user: User) => {
+  await fetch(`/api/user/${user.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+};
 
 type UserContextProps = {
   user: User;
@@ -18,6 +29,8 @@ function UserProvider({ children, user }) {
     revalidateOnMount: true,
   });
 
+  const debouncedUpdateHandler = React.useMemo(() => debounce(commitUserToDatabase, 1500), []);
+
   const update = React.useCallback(
     async (updatedUser: Partial<User>, commit: boolean = false) => {
       const updatedUserData = await mutate(
@@ -29,17 +42,19 @@ function UserProvider({ children, user }) {
       );
 
       if (commit) {
-        await fetch(`/api/user/${updatedUserData.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUserData),
-        });
+        await commitUserToDatabase(updatedUserData);
+      } else {
+        debouncedUpdateHandler(updatedUserData);
       }
     },
-    [mutate]
+    [mutate, debouncedUpdateHandler]
   );
+
+  React.useEffect(() => {
+    return () => {
+      debouncedUpdateHandler.cancel();
+    };
+  }, [debouncedUpdateHandler]);
 
   const value = React.useMemo(
     () => ({
