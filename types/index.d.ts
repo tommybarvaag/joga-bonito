@@ -57,3 +57,9 @@ export type CageballInstance = {
 export type CageballMeta = {
   hits: number;
 };
+
+export type CageballDate = {
+  from: Date;
+  to: Date;
+  formattedToFromDate: string;
+};

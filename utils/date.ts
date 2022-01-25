@@ -1,8 +1,10 @@
 import { startOfWeek } from "date-fns";
+
 export const formatYmd = (date: Date): string => date.toISOString().slice(0, 10);
 
 export const dateNextWeek = (dayOfWeek: number): Date => {
   const date = new Date();
+
   const monday = startOfWeek(date, { weekStartsOn: 1 });
   monday.setDate(monday.getDate() + 7 + dayOfWeek);
 

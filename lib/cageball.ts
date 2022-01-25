@@ -1,9 +1,7 @@
-import { CageballData, CageballInstance, JSONResponse } from "@/types";
+import { CageballData, CageballDate, JSONResponse } from "@/types";
 import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
 
 export const getCageballData = async (): Promise<CageballData[]> => {
-  console.log(formatYmd(dateNextWeek(1)));
-  console.log(formatYmd(dateNextWeek(5)));
   const response = await fetch(
     `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek(1))}&to=${formatYmd(
       dateNextWeek(5)
@@ -21,18 +19,21 @@ export const getCageballData = async (): Promise<CageballData[]> => {
   return data.filter((item) => item.available && item.bookable && new Date(item.from).getHours() >= 18 && new Date(item.to).getHours() <= 21);
 };
 
-export const getCageball = async (): Promise<{ [key: string]: CageballInstance[] }> => {
+export const getCageball = async (oneInstancePerDateSlot = true): Promise<CageballDate[]> => {
   const data = await getCageballData();
 
-  // Accumulate all instances
-  //return data.reduce<CageballInstance[]>((acc, item) => [...acc, ...item.instances.flat()], []);
-
-  // Return only one instance per date slot
-  return data.reduce<{ [key: string]: CageballInstance[] }>(
-    (acc, item) => ({
-      ...acc,
-      [formatFull(new Date(item.from))]: item.instances.flat(),
-    }),
-    {}
+  return data.reduce<CageballDate[]>(
+    (acc, item) =>
+      oneInstancePerDateSlot && acc?.find((date) => date.from === item.from && date.to === item.to)
+        ? [...acc]
+        : [
+            ...acc,
+            {
+              from: item.from,
+              to: item.to,
+              formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+            },
+          ],
+    []
   );
 };
