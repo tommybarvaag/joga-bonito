@@ -1,5 +1,4 @@
 import { UserVotes, useUser } from "@/components/user";
-import { getCageball } from "@/lib/cageball";
 import { CageballDate } from "@/types";
 import type { GetServerSideProps } from "next";
 import { getSession, signIn, signOut } from "next-auth/react";
@@ -48,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           votes: user?.votes?.map(({ dateVoted, userId, id }) => ({ id, userId, dateVoted })),
         },
       },
-      cageballDates: await getCageball(),
+      cageballDates: (await prisma.cageballEvent.findMany()).map(({ from, to, ...other }) => ({ ...other })),
     },
   };
 };
