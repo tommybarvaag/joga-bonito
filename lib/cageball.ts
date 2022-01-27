@@ -32,6 +32,7 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
               from: item.from,
               to: item.to,
               formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+              votes: [],
             },
           ],
     []

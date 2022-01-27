@@ -19,8 +19,6 @@
       "@/components/*": ["components/*"],
       "@/constants/*": ["constants/*"],
       "@/lib/*": ["lib/*"],
-      "@/logic/*": ["logic/*"],
-      "@/styles/*": ["styles/*"],
       "@/types": ["types/index"],
       "@/utils/*": ["utils/*"]
     }

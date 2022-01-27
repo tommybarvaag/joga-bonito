@@ -1,23 +1,19 @@
-import { useUser } from "@/components/user";
+import { UserVotes, useUser } from "@/components/user";
 import { getCageball } from "@/lib/cageball";
 import { CageballDate } from "@/types";
 import type { GetServerSideProps } from "next";
 import { getSession, signIn, signOut } from "next-auth/react";
+import { prisma } from "../lib";
 
-const Home = ({ cageballData }: { cageballData: CageballDate[] }) => {
+const Home = ({ cageballDates }: { cageballDates: CageballDate[] }) => {
   const { user } = useUser();
 
   return (
-    <div>
+    <>
       <h1>{user ? `Hi ${user?.name}` : "Click button below to login"}</h1>
       {user ? <button onClick={() => signOut()}>Logout</button> : <button onClick={() => signIn()}>Login</button>}
-      {cageballData &&
-        cageballData.map((cageballDate, index) => (
-          <div key={`cageball-slot-${index}`}>
-            <div>{cageballDate.formattedToFromDate}</div>
-          </div>
-        ))}
-    </div>
+      <UserVotes cageballDates={cageballDates} />
+    </>
   );
 };
 
@@ -33,10 +29,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const { emailVerified, ...user } = await prisma.user.findUnique({
+    where: {
+      id: session.user["id"],
+    },
+    include: {
+      votes: true,
+    },
+  });
+
   return {
     props: {
-      session: await getSession(context),
-      cageballData: await getCageball(),
+      session: {
+        ...session,
+        user: {
+          ...session.user,
+          ...user,
+          votes: user?.votes?.map(({ dateVoted, userId, id }) => ({ id, userId, dateVoted })),
+        },
+      },
+      cageballDates: await getCageball(),
     },
   };
 };

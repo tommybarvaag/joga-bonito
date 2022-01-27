@@ -1,3 +1,4 @@
+import { CageballEvent, CageballEvents } from "@/components/cageball";
 import { UserProvider, UserUpdateName, useUser } from "@/components/user";
 
-export { UserUpdateName, UserProvider, useUser };
+export { CageballEvent, CageballEvents, UserUpdateName, UserProvider, useUser };
