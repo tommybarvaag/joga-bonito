@@ -59,6 +59,15 @@ model Vote {
   @@unique([dateVoted, userId])
 }
 
+model CageballEvent {
+  id                  String   @id @default(cuid())
+  available           Boolean  @default(false)
+  bookable            Boolean  @default(false)
+  from                DateTime
+  to                  DateTime
+  formattedToFromDate String   @unique
+}
+
 model VerificationToken {
   id         String   @id @default(cuid())
   identifier String

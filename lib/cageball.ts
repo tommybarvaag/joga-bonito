@@ -1,7 +1,7 @@
 import { CageballData, CageballDate, JSONResponse } from "@/types";
 import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
 
-export const getCageballData = async (): Promise<CageballData[]> => {
+const getCageballData = async (): Promise<CageballData[]> => {
   const response = await fetch(
     `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek(1))}&to=${formatYmd(
       dateNextWeek(5)
@@ -32,6 +32,8 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
               from: item.from,
               to: item.to,
               formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+              available: item.available,
+              bookable: item.bookable,
               votes: [],
             },
           ],

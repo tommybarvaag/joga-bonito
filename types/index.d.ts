@@ -76,5 +76,7 @@ export type CageballDate = {
   from: Date;
   to: Date;
   formattedToFromDate: string;
+  available: boolean;
+  bookable: boolean;
   votes: CageballVote[];
 };
