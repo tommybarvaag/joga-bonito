@@ -1,5 +1,6 @@
 import { getCageball } from "@/lib/cageball";
 import prisma from "@/lib/prisma";
+import { getISOWeek } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function CageballImport(req: NextApiRequest, res: NextApiResponse) {
@@ -20,6 +21,7 @@ export default async function CageballImport(req: NextApiRequest, res: NextApiRe
             bookable: cur.bookable,
             from: new Date(cur.from),
             to: new Date(cur.to),
+            weekNumber: getISOWeek(new Date(cur.from)),
           },
         })
       )

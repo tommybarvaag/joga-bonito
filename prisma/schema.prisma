@@ -65,6 +65,7 @@ model CageballEvent {
   bookable            Boolean  @default(false)
   from                DateTime
   to                  DateTime
+  weekNumber          Int
   formattedToFromDate String   @unique
 }
 
