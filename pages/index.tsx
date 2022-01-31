@@ -1,6 +1,6 @@
 import { UserVotes, useUser } from "@/components/user";
+import { getCageballEvents } from "@/lib/cageball";
 import { CageballDate } from "@/types";
-import { getISOWeek } from "date-fns";
 import type { GetServerSideProps } from "next";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { prisma } from "../lib";
@@ -48,16 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           votes: user?.votes?.map(({ dateVoted, userId, id }) => ({ id, userId, dateVoted })),
         },
       },
-      cageballDates: (
-        await prisma.cageballEvent.findMany({
-          where: {
-            // Next week
-            weekNumber: {
-              equals: getISOWeek(new Date()) + 1,
-            },
-          },
-        })
-      ).map(({ from, to, ...other }) => ({ ...other })),
+      cageballDates: (await getCageballEvents()).map(({ from, to, ...other }) => ({ ...other })),
     },
   };
 };

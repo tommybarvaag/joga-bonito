@@ -1,5 +1,8 @@
 import { CageballData, CageballDate, JSONResponse } from "@/types";
 import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
+import { CageballEvent } from "@prisma/client";
+import { getISOWeek } from "date-fns";
+import prisma from "./prisma";
 
 const getCageballData = async (): Promise<CageballData[]> => {
   const response = await fetch(
@@ -39,4 +42,47 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
           ],
     []
   );
+};
+
+export const importCageballData = async (): Promise<CageballEvent[]> => {
+  const cageball = await getCageball();
+
+  const collection = await prisma.$transaction(
+    cageball.map((cur) =>
+      prisma.cageballEvent.upsert({
+        where: { formattedToFromDate: cur.formattedToFromDate },
+        update: {
+          available: cur.available,
+          bookable: cur.bookable,
+        },
+        create: {
+          formattedToFromDate: cur.formattedToFromDate,
+          available: cur.available,
+          bookable: cur.bookable,
+          from: new Date(cur.from),
+          to: new Date(cur.to),
+          weekNumber: getISOWeek(new Date(cur.from)),
+        },
+      })
+    )
+  );
+
+  return collection;
+};
+
+export const getCageballEvents = async (): Promise<CageballEvent[]> => {
+  let events = await prisma.cageballEvent.findMany({
+    where: {
+      // Next week
+      weekNumber: {
+        equals: getISOWeek(new Date()) + 1,
+      },
+    },
+  });
+
+  if (events.length === 0) {
+    events = await importCageballData();
+  }
+
+  return events;
 };
