@@ -1,5 +1,4 @@
-import prisma from "@/lib/prisma";
-import type { UserVote } from "@/types";
+import { getUser, updateUserAndVotes, UserWithVotes } from "@/lib/user";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
@@ -16,14 +15,7 @@ export default async function User(req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).end();
   }
 
-  const user = await prisma.user.findFirst({
-    where: {
-      id: id as string,
-    },
-    include: {
-      votes: true,
-    },
-  });
+  const user = await getUser(id as string);
 
   if (!user) {
     return res.status(404).end();
@@ -34,37 +26,7 @@ export default async function User(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "PUT" && req.body) {
-    const { votes: updatedVotes, ...updatedUser }: { votes: UserVote[] } = req.body;
-    const { votes: oldVotes, ...oldUser } = user;
-
-    const votesToCreate = (updatedVotes ?? []).filter((a: UserVote) => !oldVotes.some((b) => a.dateVoted === b.dateVoted));
-
-    await prisma.user.update({
-      data: {
-        ...oldUser,
-        ...updatedUser,
-        votes: {
-          createMany: {
-            data: votesToCreate.map((vote) => ({
-              dateVoted: vote.dateVoted,
-              weekNumberVoted: vote.weekNumberVoted,
-              cageballEventId: vote.cageballEventId,
-              updatedAt: new Date(),
-              createdAt: new Date(),
-            })),
-          },
-          deleteMany: {
-            dateVoted: {
-              notIn: updatedVotes.map((vote) => vote.dateVoted),
-            },
-            userId: user.id,
-          },
-        },
-      },
-      where: {
-        id: id as string,
-      },
-    });
+    await updateUserAndVotes(user, req.body as UserWithVotes);
 
     return res.status(200).end();
   }

@@ -4,6 +4,8 @@ import { Prisma } from "@prisma/client";
 import { getISOWeek } from "date-fns";
 import prisma from "./prisma";
 
+export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<typeof getCageballEventsWithVotesAndUser>>;
+
 const getCageballData = async (): Promise<CageballData[]> => {
   const response = await fetch(
     `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek(1))}&to=${formatYmd(
@@ -105,5 +107,3 @@ export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser
 
   return events;
 };
-
-export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<typeof getCageballEventsWithVotesAndUser>>;

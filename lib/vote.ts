@@ -2,6 +2,8 @@ import { Unpacked } from "@/types";
 import { Prisma } from "@prisma/client";
 import prisma from "./prisma";
 
+export type VoteWithUser = Unpacked<Prisma.PromiseReturnType<typeof getVotes>>;
+
 export const getVotes = async () =>
   await prisma.vote.findMany({
     include: {
@@ -36,5 +38,3 @@ export const getVotesForWeekNumber = async (weekNumber: number) =>
       user: true,
     },
   });
-
-export type VoteWithUser = Unpacked<Prisma.PromiseReturnType<typeof getVotes>>;
