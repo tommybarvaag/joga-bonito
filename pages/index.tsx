@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           votes: user?.votes?.map(({ dateVoted, userId, id }) => ({ id, userId, dateVoted })),
         },
       },
-      cageballDates: (await getCageballEvents()).map(({ from, to, ...other }) => ({ ...other })),
+      cageballDates: (await getCageballEvents()).map(({ from, to, ...other }) => ({ ...other, from: from.toISOString(), to: to.toISOString() })),
     },
   };
 };

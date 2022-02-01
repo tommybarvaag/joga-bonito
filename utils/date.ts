@@ -16,3 +16,9 @@ export const formatFull = (date: Date, locale: string = "nb-NO"): string =>
     dateStyle: "medium",
     timeStyle: "medium",
   }).format(date);
+
+export const formatSmallDateFullTime = (date: Date, locale: string = "nb-NO"): string =>
+  new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeStyle: "medium",
+  }).format(date);
