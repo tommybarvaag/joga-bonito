@@ -1,6 +1,6 @@
 import { UserProvider } from "@/components/user";
 import { VoteProvider } from "@/components/vote";
-import type { CageballEvent } from "@prisma/client";
+import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { NextComponentType, NextPageContext } from "next";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -13,7 +13,7 @@ type MyAppProps = {
   pageProps?: {
     children: ReactNode;
     session?: Session;
-    cageballEvents?: CageballEvent[];
+    cageballEvents?: CageballEventWithVotesAndUser[];
   };
 };
 
