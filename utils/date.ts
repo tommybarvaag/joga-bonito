@@ -1,4 +1,13 @@
-import { startOfWeek } from "date-fns";
+import { getISOWeek, startOfWeek } from "date-fns";
+
+export const getNextWeekNumber = (): number => {
+  const today = new Date();
+
+  const monday = startOfWeek(today, { weekStartsOn: 1 });
+  monday.setDate(monday.getDate() + 7);
+
+  return getISOWeek(monday);
+};
 
 export const formatYmd = (date: Date): string => date.toISOString().slice(0, 10);
 

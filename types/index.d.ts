@@ -3,9 +3,13 @@ type JSONResponse<T> = {
   errors?: Array<{ message: string }>;
 };
 
+export type Unpacked<T> = T extends (infer U)[] ? U : T;
+
 export type UserVote = {
   dateVoted: string;
+  weekNumberVoted: number;
   userId: string;
+  cageballEventId: string;
   created: string;
   updated: string;
 };
@@ -73,10 +77,21 @@ export type CageballVote = {
 };
 
 export type CageballDate = {
+  id: string;
   from: Date;
   to: Date;
   formattedToFromDate: string;
+  weekNumber: number;
   available: boolean;
   bookable: boolean;
   votes: CageballVote[];
+};
+
+export type Vote = {
+  id: string;
+  dateVoted: string;
+  weekNumberVoted: number;
+  userId: string;
+  created: string;
+  updated: string;
 };

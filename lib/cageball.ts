@@ -1,6 +1,6 @@
-import { CageballData, CageballDate, JSONResponse } from "@/types";
+import { CageballData, CageballDate, JSONResponse, Unpacked } from "@/types";
 import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
-import { CageballEvent } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { getISOWeek } from "date-fns";
 import prisma from "./prisma";
 
@@ -32,9 +32,11 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
         : [
             ...acc,
             {
+              id: "",
               from: item.from,
               to: item.to,
               formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+              weekNumber: getISOWeek(new Date(item.from)),
               available: item.available,
               bookable: item.bookable,
               votes: [],
@@ -44,7 +46,7 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
   );
 };
 
-export const importCageballData = async (): Promise<CageballEvent[]> => {
+export const importCageballData = async (): Promise<CageballEventWithVotesAndUser[]> => {
   const cageball = await getCageball();
 
   const collection = await prisma.$transaction(
@@ -67,18 +69,35 @@ export const importCageballData = async (): Promise<CageballEvent[]> => {
     )
   );
 
-  return collection;
+  return collection.map((item) => ({ ...item, votes: [] }));
 };
 
-export const getCageballEvents = async (): Promise<CageballEvent[]> => {
-  let events = await prisma.cageballEvent.findMany({
+const getCageballEventsWithVotesAndUser = async () =>
+  await prisma.cageballEvent.findMany({
     where: {
       // Next week
       weekNumber: {
         equals: getISOWeek(new Date()) + 1,
       },
     },
+    include: {
+      votes: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              id: true,
+              image: true,
+            },
+          },
+        },
+      },
+    },
   });
+
+export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser[]> => {
+  let events = await getCageballEventsWithVotesAndUser();
 
   if (events.length === 0) {
     events = await importCageballData();
@@ -86,3 +105,5 @@ export const getCageballEvents = async (): Promise<CageballEvent[]> => {
 
   return events;
 };
+
+export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<typeof getCageballEventsWithVotesAndUser>>;

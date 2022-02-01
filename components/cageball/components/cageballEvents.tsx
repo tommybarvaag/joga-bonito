@@ -1,12 +1,12 @@
 import { CageballEvent } from "@/components/cageball";
-import { CageballDate } from "@/types";
+import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import * as React from "react";
 
-const CageballEvents = ({ cageballDates }: { cageballDates: CageballDate[] }) => {
+const CageballEvents = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
   return (
     <>
-      {cageballDates.map((cageballDate, index) => (
-        <CageballEvent key={`cageball-slot-${index}`} cageballDate={cageballDate} />
+      {cageballEvents.map((cageballEvent, index) => (
+        <CageballEvent key={`cageball-slot-${index}`} cageballEvent={cageballEvent} />
       ))}
     </>
   );

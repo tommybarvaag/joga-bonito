@@ -47,6 +47,8 @@ export default async function User(req: NextApiRequest, res: NextApiResponse) {
           createMany: {
             data: votesToCreate.map((vote) => ({
               dateVoted: vote.dateVoted,
+              weekNumberVoted: vote.weekNumberVoted,
+              cageballEventId: vote.cageballEventId,
               updatedAt: new Date(),
               createdAt: new Date(),
             })),
