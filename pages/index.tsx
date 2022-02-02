@@ -1,3 +1,4 @@
+import { Button, Heading, Main, Nav } from "@/components/ui";
 import { UserVotes, useUser } from "@/components/user";
 import { CageballEventWithVotesAndUser, getCageballEvents } from "@/lib/cageball";
 import type { GetServerSideProps } from "next";
@@ -9,9 +10,21 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
 
   return (
     <>
-      <h1>{user ? `Hi ${user?.name}` : "Click button below to login"}</h1>
-      {user ? <button onClick={() => signOut()}>Logout</button> : <button onClick={() => signIn()}>Login</button>}
-      <UserVotes cageballEvents={cageballEvents} />
+      <Nav
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Heading size="4" noMargin>
+          {user ? `Hi ${user?.name}` : "Click button below to login"}
+        </Heading>
+        <Button onClick={() => (user ? signOut() : () => signIn())}>{user ? "Logout" : "Login"}</Button>
+      </Nav>
+      <Main>
+        <UserVotes cageballEvents={cageballEvents} />
+      </Main>
     </>
   );
 };
