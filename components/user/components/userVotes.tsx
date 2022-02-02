@@ -1,12 +1,12 @@
-import { CageballDate } from "@/types";
+import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import * as React from "react";
 import { UserVote } from ".";
 
-const UserVotes = ({ cageballDates }: { cageballDates: CageballDate[] }) => {
+const UserVotes = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
   return (
     <>
-      {cageballDates.map((cageballDate) => (
-        <UserVote key={cageballDate.formattedToFromDate} cageballDate={cageballDate} />
+      {cageballEvents.map((cageballEvent) => (
+        <UserVote key={cageballEvent.formattedToFromDate} cageballEvent={cageballEvent} />
       ))}
     </>
   );

@@ -48,18 +48,33 @@ model User {
 }
 
 model Vote {
-  id        String   @id @default(cuid())
-  dateVoted String
-  userId    String
-  createdAt DateTime
-  updatedAt DateTime
+  id              String   @id @default(cuid())
+  dateVoted       String
+  weekNumberVoted Int
+  userId          String
+  cageballEventId String
+  createdAt       DateTime
+  updatedAt       DateTime
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cageballEvent CageballEvent @relation(fields: [cageballEventId], references: [id], onDelete: Cascade)
 
-  @@unique([dateVoted, userId])
+  @@unique([dateVoted, weekNumberVoted, userId])
+}
+
+model CageballEvent {
+  id                  String   @id @default(cuid())
+  available           Boolean  @default(false)
+  bookable            Boolean  @default(false)
+  from                DateTime
+  to                  DateTime
+  weekNumber          Int
+  formattedToFromDate String   @unique
+  votes               Vote[]
 }
 
 model VerificationToken {
+  id         String   @id @default(cuid())
   identifier String
   token      String   @unique
   expires    DateTime

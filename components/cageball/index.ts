@@ -1,3 +1,3 @@
-import { CageballEvent, CageballEvents } from "./components";
+import { CageballEvent, CageballEvents, CageballEventVoters } from "./components";
 
-export { CageballEvent, CageballEvents };
+export { CageballEvent, CageballEvents, CageballEventVoters };

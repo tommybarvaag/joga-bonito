@@ -1,12 +1,29 @@
 import { UserProvider } from "@/components/user";
+import { VoteProvider } from "@/components/vote";
+import { CageballEventWithVotesAndUser } from "@/lib/cageball";
+import { NextComponentType, NextPageContext } from "next";
+import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
+import { ReactNode } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+type MyAppProps = {
+  Component: NextComponentType<NextPageContext, any, {}> & {
+    layoutProps?: any;
+  };
+  pageProps?: {
+    children: ReactNode;
+    session?: Session;
+    cageballEvents?: CageballEventWithVotesAndUser[];
+  };
+};
+
+function MyApp({ Component, pageProps }: MyAppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       <UserProvider user={pageProps.session?.user}>
-        <Component {...pageProps} />
+        <VoteProvider votes={pageProps?.cageballEvents?.reduce((result, current) => [...result, ...current.votes], [])}>
+          <Component {...pageProps} />
+        </VoteProvider>
       </UserProvider>
     </SessionProvider>
   );

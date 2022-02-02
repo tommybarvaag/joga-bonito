@@ -1,7 +1,12 @@
-import { CageballData, CageballDate, JSONResponse } from "@/types";
+import { CageballData, CageballDate, JSONResponse, Unpacked } from "@/types";
 import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
+import { Prisma } from "@prisma/client";
+import { getISOWeek } from "date-fns";
+import prisma from "./prisma";
 
-export const getCageballData = async (): Promise<CageballData[]> => {
+export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<typeof getCageballEventsWithVotesAndUser>>;
+
+const getCageballData = async (): Promise<CageballData[]> => {
   const response = await fetch(
     `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek(1))}&to=${formatYmd(
       dateNextWeek(5)
@@ -29,12 +34,76 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
         : [
             ...acc,
             {
+              id: "",
               from: item.from,
               to: item.to,
               formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+              weekNumber: getISOWeek(new Date(item.from)),
+              available: item.available,
+              bookable: item.bookable,
               votes: [],
             },
           ],
     []
   );
+};
+
+export const importCageballData = async (): Promise<CageballEventWithVotesAndUser[]> => {
+  const cageball = await getCageball();
+
+  const collection = await prisma.$transaction(
+    cageball.map((cur) =>
+      prisma.cageballEvent.upsert({
+        where: { formattedToFromDate: cur.formattedToFromDate },
+        update: {
+          available: cur.available,
+          bookable: cur.bookable,
+        },
+        create: {
+          formattedToFromDate: cur.formattedToFromDate,
+          available: cur.available,
+          bookable: cur.bookable,
+          from: new Date(cur.from),
+          to: new Date(cur.to),
+          weekNumber: getISOWeek(new Date(cur.from)),
+        },
+      })
+    )
+  );
+
+  return collection.map((item) => ({ ...item, votes: [] }));
+};
+
+const getCageballEventsWithVotesAndUser = async () =>
+  await prisma.cageballEvent.findMany({
+    where: {
+      // Next week
+      weekNumber: {
+        equals: getISOWeek(new Date()) + 1,
+      },
+    },
+    include: {
+      votes: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              id: true,
+              image: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser[]> => {
+  let events = await getCageballEventsWithVotesAndUser();
+
+  if (events.length === 0) {
+    events = await importCageballData();
+  }
+
+  return events;
 };

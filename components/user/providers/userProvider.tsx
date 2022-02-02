@@ -1,6 +1,7 @@
 import { UserUpdateName } from "@/components/user";
-import type { User } from "@/types";
+import { UserWithVotes } from "@/lib/user";
 import { fetcher } from "@/utils/fetcher";
+import { User } from "@prisma/client";
 import debounce from "lodash.debounce";
 import * as React from "react";
 import useSWR from "swr";
@@ -16,15 +17,15 @@ const commitUserToDatabase = async (user: User) => {
 };
 
 type UserContextProps = {
-  user: User;
-  update: (updatedUser: Partial<User>, commit?: boolean) => Promise<void>;
+  user: UserWithVotes;
+  update: (updatedUser: Partial<UserWithVotes>, commit?: boolean) => Promise<void>;
   isLoadingUser: boolean;
 };
 
 const UserContext = React.createContext<UserContextProps>(null);
 
 function UserProvider({ children, user }) {
-  const { data, mutate } = useSWR<User>(() => `/api/user/${user.id}`, fetcher, {
+  const { data, mutate } = useSWR<UserWithVotes>(() => `/api/user/${user.id}`, fetcher, {
     fallbackData: user,
     revalidateOnMount: true,
   });
@@ -34,7 +35,7 @@ function UserProvider({ children, user }) {
   const update = React.useCallback(
     async (updatedUser: Partial<User>, commit: boolean = false) => {
       const updatedUserData = await mutate(
-        (user: User) => ({
+        (user: UserWithVotes) => ({
           ...user,
           ...updatedUser,
         }),

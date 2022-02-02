@@ -1,8 +1,10 @@
-import { CageballDate } from "@/types";
+import { CageballEventWithVotesAndUser } from "@/lib/cageball";
+import { formatSmallDateFullTime } from "@/utils/date";
+import { CageballEvent } from "@prisma/client";
 import * as React from "react";
 
-const CageballEvent = ({ cageballDate }: { cageballDate: CageballDate }) => {
-  return <div>{cageballDate.formattedToFromDate} (voters)</div>;
+const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndUser }) => {
+  return <div>{formatSmallDateFullTime(new Date(cageballEvent.from))}</div>;
 };
 
 export default CageballEvent;
