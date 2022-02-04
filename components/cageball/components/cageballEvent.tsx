@@ -5,6 +5,8 @@ import { CageballEvent } from "@prisma/client";
 import * as React from "react";
 
 const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndUser }) => {
+  const cageballEventDate = React.useMemo(() => formatCageballEventDateAndTime(new Date(cageballEvent.from)), [cageballEvent.from]);
+
   return (
     <Text
       textAlign="center"
@@ -12,7 +14,7 @@ const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVote
         minWidth: "180px",
       }}
     >
-      {formatCageballEventDateAndTime(new Date(cageballEvent.from))}
+      {cageballEventDate}
     </Text>
   );
 };
