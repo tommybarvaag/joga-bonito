@@ -31,3 +31,17 @@ export const formatSmallDateFullTime = (date: Date, locale: string = "nb-NO"): s
     dateStyle: "medium",
     timeStyle: "medium",
   }).format(date);
+
+export const formatCageballEventDateAndTime = (date: Date, locale: string = "nb-NO"): string => {
+  const dateFormat = new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    weekday: "short",
+    month: "short",
+  });
+
+  const timeFormat = new Intl.DateTimeFormat(locale, {
+    timeStyle: "short",
+  });
+
+  return `${dateFormat.format(date)} kl. ${timeFormat.format(date)}`;
+};

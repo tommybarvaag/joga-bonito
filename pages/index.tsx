@@ -32,15 +32,15 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
         }}
       >
         <Heading size="4" noMargin>
-          {user ? `Hi ${user?.name}` : "Click button below to login"}
+          {user ? `Hei ${user?.name}` : "Klikk på knappen under for å logge inn"}
         </Heading>
         <Flex gap="3">
-          <Button onClick={() => (user ? signOut() : () => signIn())}>{user ? "Logout" : "Login"}</Button>
+          <Button onClick={() => (user ? signOut() : () => signIn())}>{user ? "Logg ut" : "Logg inn"}</Button>
           <ThemeSelect />
         </Flex>
       </Nav>
       <Main>
-        <Heading size="3">{`Week ${getISOWeek(new Date()) + 1}`}</Heading>
+        <Heading size="3">{`Uke ${getISOWeek(new Date()) + 1}`}</Heading>
         <UserVotes cageballEvents={cageballEvents} />
       </Main>
     </>

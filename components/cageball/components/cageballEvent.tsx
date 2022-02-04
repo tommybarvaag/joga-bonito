@@ -1,6 +1,6 @@
 import { Text } from "@/components/ui";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
-import { formatSmallDateFullTime } from "@/utils/date";
+import { formatCageballEventDateAndTime } from "@/utils/date";
 import { CageballEvent } from "@prisma/client";
 import * as React from "react";
 
@@ -12,7 +12,7 @@ const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVote
         minWidth: "180px",
       }}
     >
-      {formatSmallDateFullTime(new Date(cageballEvent.from))}
+      {formatCageballEventDateAndTime(new Date(cageballEvent.from))}
     </Text>
   );
 };
