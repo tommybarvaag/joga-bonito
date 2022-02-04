@@ -3,15 +3,18 @@ import { styled } from "stitches.config";
 import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from "./keyframes";
 
 const StyledArrow = styled(PopoverPrimitive.Arrow, {
-  fill: "$gray11",
+  fill: "$popover",
+  stroke: "$popoverBorder",
+  strokeWidth: "2px",
+  strokeDasharray: "0 28.5 26",
 });
 
 const StyledContent = styled(PopoverPrimitive.Content, {
   borderRadius: "$2",
   padding: "$4",
   maxWidth: 300,
-  backgroundColor: "$gray11",
-  boxShadow: "0 0 0 1px $colors$gray",
+  backgroundColor: "$popover",
+  boxShadow: "$popover",
   "@media (prefers-reduced-motion: no-preference)": {
     animationDuration: "400ms",
     animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",

@@ -178,6 +178,29 @@ const Grid = styled("div", {
         rowGap: "$9",
       },
     },
+    maxWidth: {
+      small: {
+        width: "100%",
+        maxWidth: "$smContainer",
+      },
+      medium: {
+        width: "100%",
+        maxWidth: "$mdContainer",
+      },
+      large: {
+        width: "100%",
+        maxWidth: "$lgContainer",
+      },
+      xl: {
+        width: "100%",
+        maxWidth: "$xlContainer",
+      },
+    },
+    center: {
+      true: {
+        margin: "0 auto",
+      },
+    },
   },
 });
 

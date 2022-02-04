@@ -1,4 +1,4 @@
-import { blue, blueDark, crimson, crimsonDark, gray, grayDark, green, greenDark, red, redDark } from "@radix-ui/colors";
+import { grass, grassDark, gray, grayDark } from "@radix-ui/colors";
 import type * as Stitches from "@stitches/react";
 import { createStitches } from "@stitches/react";
 
@@ -9,10 +9,10 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
   theme: {
     colors: {
       ...gray,
-      ...blue,
-      ...crimson,
-      ...red,
-      ...green,
+      ...grass,
+      cardBorder: "$gray11",
+      popover: "hsl(0 0% 85.0%)",
+      popoverBorder: "$cardBorder",
     },
     fonts: {
       default: "Arial, Helvetica, -apple-system, system-ui, sans-serif",
@@ -96,7 +96,8 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       max: "999",
     },
     shadows: {
-      card: "0 0 0 1px $colors$gray11",
+      card: "0 0 0 1px $colors$cardBorder",
+      popover: "0 0 0 1px $colors$popoverBorder",
     },
     letterSpacings: {
       1: "1x",
@@ -234,19 +235,12 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
   },
 });
 
-export const lightTheme = createTheme("light-theme", {
+export const darkTheme = createTheme("dark-theme", {
   colors: {
     ...grayDark,
-    ...blueDark,
-    ...crimsonDark,
-    ...redDark,
-    ...greenDark,
-  },
-  shadows: {
-    card: "0 2px 4px hsla(0, 0%, 0%, 0.1)",
-    input: "0 0 0 1px $colors$grayLightest",
-    inputHover: "0 0 0 1px $colors$secondary",
-    inputActive: "0 0 0 1px $colors$secondary",
-    inputFocus: "0 0 0 1px $colors$secondary",
+    ...grassDark,
+    cardBorder: "$gray7",
+    popover: "$gray7",
+    popoverBorder: "$gray9",
   },
 });

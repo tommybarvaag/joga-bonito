@@ -12,7 +12,10 @@ const UserVotes = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesA
       gridTemplateColumns={{
         "@initial": "1",
         "@bp1": "2",
+        "@bp2": "3",
       }}
+      maxWidth="large"
+      center
     >
       {cageballEvents.map((cageballEvent) => (
         <UserVote key={cageballEvent.formattedToFromDate} cageballEvent={cageballEvent} />

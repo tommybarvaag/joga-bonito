@@ -1,5 +1,5 @@
 import { CageballEvent, CageballEventVoters } from "@/components/cageball";
-import { Card, FlexItem, Svg } from "@/components/ui";
+import { Button, Card, Svg } from "@/components/ui";
 import { useUser } from "@/components/user";
 import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
@@ -24,9 +24,8 @@ const UserVote = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndU
         gap: "$3",
       }}
     >
-      <FlexItem
-        flexDirection="row"
-        alignItems="center"
+      <Button
+        variant={voted ? "grass" : "primary"}
         onClick={() => {
           const clonedUserVotes: Vote[] = JSON.parse(JSON.stringify(user?.votes ?? []));
           update(
@@ -60,12 +59,13 @@ const UserVote = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndU
           as={ArrowUpIcon}
           size="3"
           css={{
-            color: voted ? "$blue10" : "$gray10",
+            color: voted ? "$grass11" : "$gray9",
+            transition: "all 0.2s ease-in-out",
           }}
         />
         <CageballEvent cageballEvent={cageballEvent} />
-      </FlexItem>
-      <CageballEventVoters cageballEvent={cageballEvent} />
+      </Button>
+      <CageballEventVoters cageballEvent={cageballEvent} voted={voted} />
     </Card>
   );
 };

@@ -4,7 +4,7 @@ import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import * as React from "react";
 
-const CageballEventVoters = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndUser }) => {
+const CageballEventVoters = ({ cageballEvent, voted = false }: { cageballEvent: CageballEventWithVotesAndUser; voted?: boolean }) => {
   const { votes } = useVote();
 
   const votesForDate = React.useMemo(() => (votes ?? []).filter((vote) => vote.dateVoted === cageballEvent.formattedToFromDate), [votes, cageballEvent]);
@@ -12,7 +12,9 @@ const CageballEventVoters = ({ cageballEvent }: { cageballEvent: CageballEventWi
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button border>{votesForDate.length}</Button>
+        <Button variant={voted ? "grass" : "primary"} borderRound>
+          {votesForDate.length}
+        </Button>
       </PopoverTrigger>
       <PopoverContent>
         <Box>

@@ -61,35 +61,36 @@ export const buttonStyles = css({
       },
     },
     variant: {
-      crimson: {
-        backgroundColor: "$crimson11",
+      primary: {
+        backgroundColor: "$gray1",
         color: "$gray12",
+        border: "1px solid",
+        borderColor: "$gray9",
+        "&:hover": {
+          borderColor: "$gray8",
+        },
+      },
+      grass: {
+        backgroundColor: "$gray1",
+        color: "$grass11",
+        border: "1px solid",
+        borderColor: "$grass9",
+        "&:hover": {
+          borderColor: "$grass8",
+        },
       },
     },
-    border: {
+    borderRound: {
       true: {
-        fontWeight: "bold",
         padding: "0",
         height: "$5",
         width: "$5",
-        border: "2px solid",
         borderRadius: "$round",
       },
     },
   },
-  compoundVariants: [
-    {
-      variant: "crimson",
-      border: true,
-      css: {
-        color: "$crimson11",
-        backgroundColor: "$gray12",
-        borderColor: "$crimson11",
-      },
-    },
-  ],
   defaultVariants: {
-    variant: "crimson",
+    variant: "primary",
     size: "2",
   },
 });

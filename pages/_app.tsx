@@ -6,7 +6,7 @@ import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
-import { globalCss, lightTheme } from "stitches.config";
+import { darkTheme, globalCss } from "stitches.config";
 
 type MyAppProps = {
   Component: NextComponentType<NextPageContext, any, {}> & {
@@ -30,8 +30,8 @@ const globalStyles = globalCss({
     overflowX: "hidden",
   },
   body: {
-    backgroundColor: "$gray12",
-    color: "$gray1",
+    backgroundColor: "$gray2",
+    color: "$gray12",
     fontFamily: "$default",
     minWidth: "360px",
     scrollBehavior: "smooth",
@@ -51,9 +51,12 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <ThemeProvider
       attribute="class"
       value={{
-        dark: "dark-theme",
-        light: lightTheme.className,
+        light: "light-theme",
+        dark: darkTheme.className,
       }}
+      defaultTheme="dark"
+      enableSystem={false}
+      storageKey="joga-bonito-theme"
     >
       <SessionProvider session={pageProps.session}>
         <UserProvider user={pageProps.session?.user}>

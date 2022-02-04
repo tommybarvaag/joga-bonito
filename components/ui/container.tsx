@@ -24,29 +24,6 @@ const Container = styled("div", {
         maxWidth: "none",
       },
     },
-    backgroundColor: {
-      main: {
-        backgroundColor: "$main",
-      },
-      secondary: {
-        backgroundColor: "$secondary",
-      },
-      grayDark: {
-        backgroundColor: "$grayDark",
-      },
-      gray: {
-        backgroundColor: "$gray",
-      },
-      grayLight: {
-        backgroundColor: "$grayLight",
-      },
-      grayLighter: {
-        backgroundColor: "$grayLighter",
-      },
-      grayLightest: {
-        backgroundColor: "$grayLightest",
-      },
-    },
     center: {
       true: {
         margin: "0 auto",
