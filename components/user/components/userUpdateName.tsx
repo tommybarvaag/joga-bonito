@@ -1,3 +1,4 @@
+import { Button, Fieldset, Flex, Form, Heading, Input, Label } from "@/components/ui";
 import { useUser } from "@/components/user";
 import * as React from "react";
 
@@ -6,10 +7,16 @@ const UserUpdateName = () => {
   const [name, setName] = React.useState("");
 
   return (
-    <>
-      <h1>Update name</h1>
-      <p>Enter name to continue.</p>
-      <form
+    <Flex
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      css={{
+        height: "100vh",
+      }}
+    >
+      <Heading size="5">Update name</Heading>
+      <Form
         id="user-update-name"
         onSubmit={async (e) => {
           e.preventDefault();
@@ -17,16 +24,19 @@ const UserUpdateName = () => {
           // Update user state
           await update({ name }, true);
         }}
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "$4",
+        }}
       >
-        <fieldset>
-          <label htmlFor="usernameInput">
-            <span>Name</span>
-            <input id="usernameInput" type="text" value={name} onChange={(e) => setName(e.currentTarget.value)} />
-          </label>
-        </fieldset>
-        <button type="submit">Update</button>
-      </form>
-    </>
+        <Fieldset>
+          <Label htmlFor="usernameInput">Name</Label>
+          <Input id="usernameInput" type="text" value={name} placeholder="Name namesen" onChange={(e) => setName(e.currentTarget.value)} />
+        </Fieldset>
+        <Button type="submit">Update</Button>
+      </Form>
+    </Flex>
   );
 };
 

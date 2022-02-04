@@ -1,17 +1,48 @@
+import { Button, Flex, Heading, IconButton, Main, Nav, Svg } from "@/components/ui";
 import { UserVotes, useUser } from "@/components/user";
 import { CageballEventWithVotesAndUser, getCageballEvents } from "@/lib/cageball";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { getISOWeek } from "date-fns";
 import type { GetServerSideProps } from "next";
 import { getSession, signIn, signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
+import * as React from "react";
 import { prisma } from "../lib";
+
+const ThemeSelect = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <IconButton onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      {theme === "light" ? <Svg as={MoonIcon} size="3" variant="gray"></Svg> : <Svg as={SunIcon} size="3" variant="gray"></Svg>}
+    </IconButton>
+  );
+};
 
 const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
   const { user } = useUser();
 
   return (
     <>
-      <h1>{user ? `Hi ${user?.name}` : "Click button below to login"}</h1>
-      {user ? <button onClick={() => signOut()}>Logout</button> : <button onClick={() => signIn()}>Login</button>}
-      <UserVotes cageballEvents={cageballEvents} />
+      <Nav
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Heading size="4" noMargin>
+          {user ? `Hi ${user?.name}` : "Click button below to login"}
+        </Heading>
+        <Flex gap="3">
+          <Button onClick={() => (user ? signOut() : () => signIn())}>{user ? "Logout" : "Login"}</Button>
+          <ThemeSelect />
+        </Flex>
+      </Nav>
+      <Main>
+        <Heading size="3">{`Week ${getISOWeek(new Date()) + 1}`}</Heading>
+        <UserVotes cageballEvents={cageballEvents} />
+      </Main>
     </>
   );
 };
