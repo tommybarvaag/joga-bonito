@@ -105,5 +105,5 @@ export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser
     events = await importCageballData();
   }
 
-  return events;
+  return events?.filter((event) => event.from.getDay() < 5)?.sort((a, b) => a.from.getDate() - b.from.getDate()) ?? [];
 };
