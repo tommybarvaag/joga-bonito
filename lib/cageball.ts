@@ -1,5 +1,5 @@
 import { CageballData, CageballDate, JSONResponse, Unpacked } from "@/types";
-import { dateNextWeek, formatFull, formatYmd } from "@/utils/date";
+import { dateNextWeek, formatCageballEventDateAndTime, formatYmd } from "@/utils/date";
 import { Prisma } from "@prisma/client";
 import { getISOWeek } from "date-fns";
 import prisma from "./prisma";
@@ -21,7 +21,7 @@ const getCageballData = async (): Promise<CageballData[]> => {
 
   const { data, errors }: JSONResponse<CageballData[]> = await response.json();
 
-  return data.filter((item) => item.available && item.bookable && new Date(item.from).getHours() >= 18 && new Date(item.to).getHours() <= 21);
+  return data.filter((item) => new Date(item.from).getHours() >= 18 && new Date(item.to).getHours() <= 21);
 };
 
 export const getCageball = async (oneInstancePerDateSlot = true): Promise<CageballDate[]> => {
@@ -37,10 +37,10 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
               id: "",
               from: item.from,
               to: item.to,
-              formattedToFromDate: `${formatFull(new Date(item.from))} - ${formatFull(new Date(item.to))}`,
+              formattedToFromDate: `${formatCageballEventDateAndTime(new Date(item.from))} - ${formatCageballEventDateAndTime(new Date(item.to))}`,
               weekNumber: getISOWeek(new Date(item.from)),
-              available: item.available,
-              bookable: item.bookable,
+              available: data.some((i) => i.from === item.from && i.to === item.to && i.available),
+              bookable: data.some((i) => i.from === item.from && i.to === item.to && i.bookable),
               votes: [],
             },
           ],
@@ -105,5 +105,10 @@ export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser
     events = await importCageballData();
   }
 
-  return events?.filter((event) => event.from.getDay() < 5)?.sort((a, b) => a.from.getDate() - b.from.getDate()) ?? [];
+  return (
+    events
+      ?.filter((event) => event.available && event.bookable && event.from.getDay() < 5 && event.to.getHours() < 22)
+      ?.sort((a, b) => a.from.getHours() - b.from.getHours())
+      ?.sort((a, b) => a.from.getDate() - b.from.getDate()) ?? []
+  );
 };

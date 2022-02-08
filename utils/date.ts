@@ -1,4 +1,5 @@
-import { getISOWeek, startOfWeek } from "date-fns";
+import { format, getISOWeek, Locale, startOfWeek } from "date-fns";
+import { nb } from "date-fns/locale";
 
 export const getNextWeekNumber = (): number => {
   const today = new Date();
@@ -20,28 +21,10 @@ export const dateNextWeek = (dayOfWeek: number): Date => {
   return monday;
 };
 
-export const formatFull = (date: Date, locale: string = "nb-NO"): string =>
-  new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "medium",
-  }).format(date);
-
-export const formatSmallDateFullTime = (date: Date, locale: string = "nb-NO"): string =>
-  new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "medium",
-  }).format(date);
-
-export const formatCageballEventDateAndTime = (date: Date, locale: string = "nb-NO"): string => {
-  const dateFormat = new Intl.DateTimeFormat(locale, {
-    day: "2-digit",
-    weekday: "short",
-    month: "short",
-  });
-
-  const timeFormat = new Intl.DateTimeFormat(locale, {
-    timeStyle: "short",
-  });
-
-  return `${dateFormat.format(date)} kl. ${timeFormat.format(date)}`;
+export const formatCageballEventDateAndTime = (date: Date, locale: Locale = nb): string => {
+  return `${format(date, "dd. MMM", {
+    locale,
+  })} kl. ${format(date, "HH:mm", {
+    locale,
+  })}`;
 };
