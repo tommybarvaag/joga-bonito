@@ -107,7 +107,7 @@ export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser
 
   return (
     events
-      ?.filter((event) => event.available && event.bookable && event.from.getDay() < 5 && event.to.getHours() < 22)
+      ?.filter((event) => event.from.getDay() < 5 && event.to.getHours() < 22)
       ?.sort((a, b) => a.from.getHours() - b.from.getHours())
       ?.sort((a, b) => a.from.getDate() - b.from.getDate()) ?? []
   );

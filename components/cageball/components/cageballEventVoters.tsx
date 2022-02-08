@@ -12,7 +12,7 @@ const CageballEventVoters = ({ cageballEvent, voted = false }: { cageballEvent: 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant={voted ? "grass" : "primary"} borderRound>
+        <Button variant={voted ? "grass" : "primary"} disabled={!cageballEvent.available || !cageballEvent.bookable} borderRound>
           {votesForDate.length}
         </Button>
       </PopoverTrigger>

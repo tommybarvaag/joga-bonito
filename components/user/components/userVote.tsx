@@ -22,10 +22,12 @@ const UserVote = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndU
         justifyContent: "center",
         alignItems: "center",
         gap: "$3",
+        backgroundColor: cageballEvent.available && cageballEvent.bookable ? "$gray3" : "transparent",
       }}
     >
       <Button
         variant={voted ? "grass" : "primary"}
+        disabled={!cageballEvent.available || !cageballEvent.bookable}
         onClick={() => {
           const clonedUserVotes: Vote[] = JSON.parse(JSON.stringify(user?.votes ?? []));
           update(

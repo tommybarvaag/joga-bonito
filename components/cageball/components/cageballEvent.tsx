@@ -11,7 +11,7 @@ const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVote
     <Text
       textAlign="center"
       css={{
-        minWidth: "180px",
+        minWidth: "140px",
       }}
     >
       {cageballEventDate}
