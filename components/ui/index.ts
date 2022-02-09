@@ -2,6 +2,7 @@ import Box from "./box";
 import Button from "./button";
 import Card from "./card";
 import Container from "./container";
+import Dialog, { DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./dialog";
 import Fieldset from "./fieldset";
 import Flex from "./flex";
 import FlexItem from "./flexItem";
@@ -26,6 +27,12 @@ export {
   Button,
   Card,
   Container,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
   Fieldset,
   Flex,
   FlexItem,

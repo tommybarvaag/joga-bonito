@@ -48,6 +48,9 @@ const Svg = styled("svg", {
       gray: {
         color: "$gray1",
       },
+      text: {
+        color: "$gray12",
+      },
     },
   },
   defaultVariants: {

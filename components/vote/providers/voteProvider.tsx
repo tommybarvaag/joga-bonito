@@ -13,7 +13,7 @@ type VoteContextProps = {
 
 const VoteContext = React.createContext<VoteContextProps>(null);
 
-function VoteProvider({ children, votes }: { children: React.ReactNode; votes: VoteWithUser[] }) {
+function VoteProvider({ children, votes }: { children: React.ReactNode; votes?: VoteWithUser[] }) {
   const { data, mutate } = useSWR<VoteWithUser[]>(() => `/api/vote/weeknumber/${getNextWeekNumber()}`, fetcher, {
     fallbackData: votes,
     revalidateOnMount: true,

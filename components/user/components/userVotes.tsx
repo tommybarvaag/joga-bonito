@@ -16,7 +16,7 @@ const UserVotes = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesA
 
   return (
     <>
-      <Heading>Available cageball slots</Heading>
+      <Heading>Tilgjengelig for booking</Heading>
       <Grid
         gap="3"
         justifyContent="center"
@@ -36,7 +36,7 @@ const UserVotes = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesA
           <UserVote key={cageballEvent.formattedToFromDate} cageballEvent={cageballEvent} />
         ))}
       </Grid>
-      <Heading>Unavailable cageball slots</Heading>
+      <Heading>Utilgjengelig for booking</Heading>
       <Grid
         gap="3"
         justifyContent="center"
