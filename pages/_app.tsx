@@ -58,8 +58,8 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       enableSystem={false}
       storageKey="joga-bonito-theme"
     >
-      <SessionProvider session={pageProps.session}>
-        <UserProvider user={pageProps.session?.user}>
+      <SessionProvider session={pageProps?.session}>
+        <UserProvider user={pageProps?.session?.user}>
           <VoteProvider votes={pageProps?.cageballEvents?.reduce((result, current) => [...result, ...current.votes], [])}>
             <Component {...pageProps} />
           </VoteProvider>

@@ -1,4 +1,4 @@
-import { grass, grassDark, gray, grayDark } from "@radix-ui/colors";
+import { blackA, grass, grassDark, gray, grayDark } from "@radix-ui/colors";
 import type * as Stitches from "@stitches/react";
 import { createStitches } from "@stitches/react";
 
@@ -8,9 +8,13 @@ export type CSS = Stitches.CSS<typeof config>;
 export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes, config } = createStitches({
   theme: {
     colors: {
+      ...blackA,
       ...gray,
       ...grass,
       cardBorder: "$gray11",
+      overlay: blackA.blackA11,
+      panel: gray.gray5,
+      panelBorder: gray.gray9,
       popover: "hsl(0 0% 85.0%)",
       popoverBorder: "$cardBorder",
     },
@@ -93,7 +97,14 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       2: "200",
       3: "300",
       4: "400",
-      max: "999",
+      5: "500",
+      6: "600",
+      7: "700",
+      8: "800",
+      9: "900",
+      modalOverlay: "1000",
+      modal: "1100",
+      max: "9999",
     },
     shadows: {
       card: "0 0 0 1px $colors$cardBorder",
@@ -240,6 +251,9 @@ export const darkTheme = createTheme("dark-theme", {
     ...grayDark,
     ...grassDark,
     cardBorder: "$gray7",
+    overlay: blackA.blackA11,
+    panel: grayDark.gray1,
+    panelBorder: grayDark.gray5,
     popover: "$gray7",
     popoverBorder: "$gray9",
   },

@@ -2,6 +2,7 @@ import Box from "./box";
 import Button from "./button";
 import Card from "./card";
 import Container from "./container";
+import Dialog, { DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./dialog";
 import Fieldset from "./fieldset";
 import Flex from "./flex";
 import FlexItem from "./flexItem";
@@ -17,6 +18,7 @@ import Li from "./li";
 import Main from "./main";
 import Nav from "./nav";
 import Paragraph from "./paragraph";
+import Path from "./path";
 import Svg from "./svg";
 import Text from "./text";
 import Ul from "./ul";
@@ -26,6 +28,12 @@ export {
   Button,
   Card,
   Container,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
   Fieldset,
   Flex,
   FlexItem,
@@ -41,6 +49,7 @@ export {
   Main,
   Nav,
   Paragraph,
+  Path,
   Svg,
   Text,
   Ul,

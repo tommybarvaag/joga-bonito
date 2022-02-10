@@ -1,17 +1,17 @@
 import { styled } from "stitches.config";
 
 const Nav = styled("nav", {
-  padding: "$4",
+  padding: "$2 $4",
   width: "100%",
-  minHeight: "100px",
+  minHeight: "75px",
 
   variants: {
     variant: {
       header: {
-        boxShadow: "inset 0 -1px $colors$gray"
-      }
-    }
-  }
+        boxShadow: "inset 0 -1px $colors$gray",
+      },
+    },
+  },
 });
 
 export default Nav;
