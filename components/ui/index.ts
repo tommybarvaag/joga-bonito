@@ -18,6 +18,7 @@ import Li from "./li";
 import Main from "./main";
 import Nav from "./nav";
 import Paragraph from "./paragraph";
+import Path from "./path";
 import Svg from "./svg";
 import Text from "./text";
 import Ul from "./ul";
@@ -48,6 +49,7 @@ export {
   Main,
   Nav,
   Paragraph,
+  Path,
   Svg,
   Text,
   Ul,
