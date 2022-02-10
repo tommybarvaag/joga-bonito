@@ -69,8 +69,6 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
     }
   });
 
-  console.log(bind);
-
   return (
     <>
       <Nav
@@ -112,6 +110,9 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
               css={{
                 position: "absolute",
                 right: "$4",
+                "@bp1": {
+                  display: "none",
+                },
               }}
             >
               <Svg as={HamburgerMenuIcon} />
