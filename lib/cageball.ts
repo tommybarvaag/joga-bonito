@@ -8,8 +8,8 @@ export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<ty
 
 const getCageballData = async (): Promise<CageballData[]> => {
   const response = await fetch(
-    `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek(1))}&to=${formatYmd(
-      dateNextWeek(5)
+    `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek("monday"))}&to=${formatYmd(
+      dateNextWeek("friday")
     )}`,
     {
       method: "GET",

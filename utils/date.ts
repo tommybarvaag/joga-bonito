@@ -1,5 +1,7 @@
-import { format, getISOWeek, Locale, startOfWeek } from "date-fns";
+import { format, getDate, getISOWeek, Locale, setDate, startOfWeek } from "date-fns";
 import { nb } from "date-fns/locale";
+
+type DayString = "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
 
 export const getNextWeekNumber = (): number => {
   const today = new Date();
@@ -10,21 +12,57 @@ export const getNextWeekNumber = (): number => {
   return getISOWeek(monday);
 };
 
-export const formatYmd = (date: Date): string => date.toISOString().slice(0, 10);
+export const formatYmd = (date: Date, locale: Locale = nb): string => format(date, "yyyy-MM-dd", { locale });
 
-export const dateNextWeek = (dayOfWeek: number): Date => {
+const getDayOfWeekFromString = (day: DayString): number => {
+  switch (day) {
+    case "monday":
+      return 0;
+    case "tuesday":
+      return 1;
+    case "wednesday":
+      return 2;
+    case "thursday":
+      return 3;
+    case "friday":
+      return 4;
+    case "saturday":
+      return 5;
+    case "sunday":
+      return 6;
+    default:
+      return 0;
+  }
+};
+
+export const dateNextWeek = (dayOfWeek: DayString, locale: Locale = nb): Date => {
   const date = new Date();
 
-  const monday = startOfWeek(date, { weekStartsOn: 1 });
-  monday.setDate(monday.getDate() + 7 + dayOfWeek);
+  const monday = startOfWeek(date, { weekStartsOn: 1, locale });
 
-  return monday;
+  const dateNextWeek = setDate(monday, getDate(monday) + 7 + getDayOfWeekFromString(dayOfWeek));
+
+  return dateNextWeek;
+};
+
+export const formatCageballEventDay = (date: Date, locale: Locale = nb): string => {
+  return format(date, "EEEE", {
+    locale,
+  });
+};
+
+export const formatCageballEventDate = (date: Date, locale: Locale = nb): string => {
+  return format(date, "dd. MMM", {
+    locale,
+  });
+};
+
+export const formatCageballEventTime = (date: Date, locale: Locale = nb): string => {
+  return format(date, "HH:mm", {
+    locale,
+  });
 };
 
 export const formatCageballEventDateAndTime = (date: Date, locale: Locale = nb): string => {
-  return `${format(date, "dd. MMM", {
-    locale,
-  })} kl. ${format(date, "HH:mm", {
-    locale,
-  })}`;
+  return `${formatCageballEventDate(date, locale)} kl. ${formatCageballEventTime(date, locale)}`;
 };
