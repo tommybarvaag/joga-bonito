@@ -15,6 +15,7 @@ import Image from "./image";
 import Input from "./input";
 import Label from "./label";
 import Li from "./li";
+import Link from "./link";
 import Main from "./main";
 import Nav from "./nav";
 import Paragraph from "./paragraph";
@@ -46,6 +47,7 @@ export {
   Input,
   Label,
   Li,
+  Link,
   Main,
   Nav,
   Paragraph,

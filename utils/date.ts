@@ -35,12 +35,20 @@ const getDayOfWeekFromString = (day: DayString): number => {
   }
 };
 
-export const dateNextWeek = (dayOfWeek: DayString, locale: Locale = nb): Date => {
+export const dateNextWeek = (dayOfWeek: DayString, weekNumber?: number, locale: Locale = nb): Date => {
   const date = new Date();
+  let daysToAdd = 7;
+
+  const nextWeek = getISOWeek(new Date()) + 1;
+
+  if (weekNumber > nextWeek) {
+    const extraDays = (weekNumber - nextWeek) * 7;
+    daysToAdd = daysToAdd + extraDays;
+  }
 
   const monday = startOfWeek(date, { weekStartsOn: 1, locale });
 
-  const dateNextWeek = setDate(monday, getDate(monday) + 7 + getDayOfWeekFromString(dayOfWeek));
+  const dateNextWeek = setDate(monday, getDate(monday) + daysToAdd + getDayOfWeekFromString(dayOfWeek));
 
   return dateNextWeek;
 };

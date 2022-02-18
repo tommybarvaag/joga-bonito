@@ -3,16 +3,15 @@ import { Heading, Main } from "@/components/ui";
 import { AuthenticatedLayout, UserVotes } from "@/components/user";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { initCageballSsr } from "@/utils/page";
-import { getISOWeek } from "date-fns";
 import type { GetServerSideProps } from "next";
 import * as React from "react";
 
-const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
+const WeekNumberPage = ({ weekNumber, cageballEvents }: { weekNumber: number; cageballEvents: CageballEventWithVotesAndUser[] }) => {
   return (
     <>
       <Menu />
       <Main>
-        <Heading size="3">{`Stem for uke ${getISOWeek(new Date()) + 1}`}</Heading>
+        <Heading size="3">{`Stem for uke ${weekNumber}`}</Heading>
         <UserVotes cageballEvents={cageballEvents} />
       </Main>
     </>
@@ -21,11 +20,11 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
 
 export const getServerSideProps: GetServerSideProps = async (context) => await initCageballSsr(context);
 
-Home.layoutProps = {
+WeekNumberPage.layoutProps = {
   meta: {
-    title: "Home",
+    title: "Week",
   },
   Layout: AuthenticatedLayout,
 };
 
-export default Home;
+export default WeekNumberPage;
