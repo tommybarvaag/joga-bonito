@@ -6,11 +6,11 @@ import prisma from "./prisma";
 
 export type CageballEventWithVotesAndUser = Unpacked<Prisma.PromiseReturnType<typeof getCageballEventsWithVotesAndUser>>;
 
-const getCageballData = async (): Promise<CageballData[]> => {
+const getCageballData = async (weekNumber?: number): Promise<CageballData[]> => {
   const response = await fetch(
-    `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(dateNextWeek("monday"))}&to=${formatYmd(
-      dateNextWeek("friday")
-    )}`,
+    `https://api.ibooking.no/v1/resource_instances?slots=1&studio_id=1026&resource_category_id=783&from=${formatYmd(
+      dateNextWeek("monday", weekNumber)
+    )}&to=${formatYmd(dateNextWeek("friday", weekNumber))}`,
     {
       method: "GET",
       headers: {
@@ -24,8 +24,8 @@ const getCageballData = async (): Promise<CageballData[]> => {
   return data.filter((item) => new Date(item.from).getHours() >= 18 && new Date(item.to).getHours() <= 21);
 };
 
-export const getCageball = async (oneInstancePerDateSlot = true): Promise<CageballDate[]> => {
-  const data = await getCageballData();
+export const getCageball = async (weekNumber?: number, oneInstancePerDateSlot = true): Promise<CageballDate[]> => {
+  const data = await getCageballData(weekNumber);
 
   return data.reduce<CageballDate[]>(
     (acc, item) =>
@@ -48,8 +48,8 @@ export const getCageball = async (oneInstancePerDateSlot = true): Promise<Cageba
   );
 };
 
-export const importCageballData = async (): Promise<CageballEventWithVotesAndUser[]> => {
-  const cageball = await getCageball();
+export const importCageballData = async (weekNumber?: number): Promise<CageballEventWithVotesAndUser[]> => {
+  const cageball = await getCageball(weekNumber);
 
   const collection = await prisma.$transaction(
     cageball.map((cur) =>
@@ -74,12 +74,12 @@ export const importCageballData = async (): Promise<CageballEventWithVotesAndUse
   return collection.map((item) => ({ ...item, votes: [] }));
 };
 
-const getCageballEventsWithVotesAndUser = async () =>
+const getCageballEventsWithVotesAndUser = async (weekNumber?: number) =>
   await prisma.cageballEvent.findMany({
     where: {
       // Next week
       weekNumber: {
-        equals: getISOWeek(new Date()) + 1,
+        equals: weekNumber ?? getISOWeek(new Date()) + 1,
       },
     },
     include: {
@@ -98,17 +98,12 @@ const getCageballEventsWithVotesAndUser = async () =>
     },
   });
 
-export const getCageballEvents = async (): Promise<CageballEventWithVotesAndUser[]> => {
-  let events = await getCageballEventsWithVotesAndUser();
+export const getCageballEvents = async (weekNumber?: number): Promise<CageballEventWithVotesAndUser[]> => {
+  let events = await getCageballEventsWithVotesAndUser(weekNumber);
 
   if (events.length === 0) {
-    events = await importCageballData();
+    events = await importCageballData(weekNumber);
   }
 
-  return (
-    events
-      ?.filter((event) => event.from.getDay() < 5 && event.to.getHours() < 22)
-      ?.sort((a, b) => a.from.getHours() - b.from.getHours())
-      ?.sort((a, b) => a.from.getDate() - b.from.getDate()) ?? []
-  );
+  return events?.filter((event) => event.from.getDay() < 5 && event.to.getHours() < 22)?.sort((a, b) => a.from.getTime() - b.from.getTime()) ?? [];
 };

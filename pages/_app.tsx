@@ -1,10 +1,8 @@
-import { UserProvider } from "@/components/user";
-import { VoteProvider } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { NextComponentType, NextPageContext } from "next";
 import { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
+import * as React from "react";
 import { ReactNode } from "react";
 import { darkTheme, globalCss } from "stitches.config";
 
@@ -47,6 +45,11 @@ const globalStyles = globalCss({
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   globalStyles();
+
+  const Layout = Component.layoutProps?.Layout || React.Fragment;
+
+  const layoutProps = Component.layoutProps?.Layout ? { pageProps, layoutProps: Component.layoutProps } : {};
+
   return (
     <ThemeProvider
       attribute="class"
@@ -58,13 +61,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       enableSystem={false}
       storageKey="joga-bonito-theme"
     >
-      <SessionProvider session={pageProps?.session}>
-        <UserProvider user={pageProps?.session?.user}>
-          <VoteProvider votes={pageProps?.cageballEvents?.reduce((result, current) => [...result, ...current.votes], [])}>
-            <Component {...pageProps} />
-          </VoteProvider>
-        </UserProvider>
-      </SessionProvider>
+      <Layout {...layoutProps}>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }

@@ -1,7 +1,7 @@
 import { Logo } from "@/components/assets";
 import { MobileMenu } from "@/components/nav";
 import { ThemeSelect } from "@/components/theme";
-import { Button, Flex, Nav, Svg } from "@/components/ui";
+import { Button, Flex, Link, Nav, Svg } from "@/components/ui";
 import { useUser } from "@/components/user";
 import { signIn, signOut } from "next-auth/react";
 import * as React from "react";
@@ -25,14 +25,16 @@ const Menu = ({ ...other }: { css?: CSS }) => {
       }}
       {...other}
     >
-      <Svg
-        as={Logo}
-        variant="text"
-        css={{
-          width: "195px",
-          height: "48px",
-        }}
-      />
+      <Link href="/">
+        <Svg
+          as={Logo}
+          variant="text"
+          css={{
+            width: "195px",
+            height: "48px",
+          }}
+        />
+      </Link>
       <Flex
         gap="3"
         css={{

@@ -105,6 +105,7 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       modalOverlay: "1000",
       modal: "1100",
       max: "9999",
+      pit: "-9999",
     },
     shadows: {
       card: "0 0 0 1px $colors$cardBorder",
