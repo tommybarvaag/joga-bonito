@@ -67,7 +67,7 @@ const UserVote = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndU
         />
         <CageballEvent cageballEvent={cageballEvent} />
       </Button>
-      <CageballEventVoters cageballEvent={cageballEvent} voted={voted} />
+      <CageballEventVoters asPopover cageballEvent={cageballEvent} voted={voted} />
     </Card>
   );
 };

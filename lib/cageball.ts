@@ -105,5 +105,9 @@ export const getCageballEvents = async (weekNumber?: number): Promise<CageballEv
     events = await importCageballData(weekNumber);
   }
 
-  return events?.filter((event) => event.from.getDay() < 5 && event.to.getHours() < 22)?.sort((a, b) => a.from.getTime() - b.from.getTime()) ?? [];
+  return (
+    events
+      ?.filter((event) => event.from.getDay() < 5 && event.from.getHours() > 18 && event.to.getHours() < 22)
+      ?.sort((a, b) => a.from.getTime() - b.from.getTime()) ?? []
+  );
 };

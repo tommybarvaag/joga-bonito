@@ -1,4 +1,4 @@
-import { blackA, grass, grassDark, gray, grayDark } from "@radix-ui/colors";
+import { blackA, grass, grassDark, gray, grayDark, tomato, tomatoDark } from "@radix-ui/colors";
 import type * as Stitches from "@stitches/react";
 import { createStitches } from "@stitches/react";
 
@@ -11,6 +11,7 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       ...blackA,
       ...gray,
       ...grass,
+      ...tomato,
       cardBorder: "$gray11",
       overlay: blackA.blackA11,
       panel: gray.gray5,
@@ -251,6 +252,7 @@ export const darkTheme = createTheme("dark-theme", {
   colors: {
     ...grayDark,
     ...grassDark,
+    ...tomatoDark,
     cardBorder: "$gray7",
     overlay: blackA.blackA11,
     panel: grayDark.gray1,

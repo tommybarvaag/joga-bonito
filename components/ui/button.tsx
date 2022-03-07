@@ -79,6 +79,15 @@ export const buttonStyles = css({
           borderColor: "$grass8",
         },
       },
+      tomato: {
+        backgroundColor: "$gray1",
+        color: "$tomato11",
+        border: "1px solid",
+        borderColor: "$tomato9",
+        "&:hover": {
+          borderColor: "$tomato8",
+        },
+      },
     },
     borderRound: {
       true: {
@@ -86,6 +95,11 @@ export const buttonStyles = css({
         height: "$5",
         width: "$5",
         borderRadius: "$round",
+      },
+    },
+    fullWidth: {
+      true: {
+        width: "100%",
       },
     },
   },

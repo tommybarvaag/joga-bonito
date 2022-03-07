@@ -53,6 +53,10 @@ export const dateNextWeek = (dayOfWeek: DayString, weekNumber?: number, locale: 
   return dateNextWeek;
 };
 
+export const formatDay = (date: Date, locale: Locale = nb): string => {
+  return format(date, "EEEE", { locale });
+};
+
 export const formatCageballEventDay = (date: Date, locale: Locale = nb): string => {
   return format(date, "EEEE", {
     locale,
