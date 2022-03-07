@@ -107,7 +107,7 @@ export const getCageballEvents = async (weekNumber?: number): Promise<CageballEv
 
   return (
     events
-      ?.filter((event) => event.from.getDay() < 5 && event.from.getHours() > 18 && event.to.getHours() < 22)
+      ?.filter((event) => event.from.getUTCDay() < 5 && event.from.getUTCHours() > 17 && event.to.getUTCHours() < 22)
       ?.sort((a, b) => a.from.getTime() - b.from.getTime()) ?? []
   );
 };
