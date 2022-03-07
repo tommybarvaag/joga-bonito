@@ -66,7 +66,7 @@ const UserVotesAsCalendar = ({ cageballEvents }: { cageballEvents: CageballEvent
     () =>
       (cageballEvents ?? []).reduce<{ [key: string]: CageballEventWithVotesAndUser[] }>((result, current) => {
         const day = formatDay(new Date(current.from));
-        return current.available
+        return current.available && current.bookable
           ? {
               ...result,
               [day]: [...(result[day] ?? []), current],

@@ -7,7 +7,7 @@ import { getISOWeek } from "date-fns";
 import type { GetServerSideProps } from "next";
 import * as React from "react";
 
-const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
+const HomePage = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
   return (
     <>
       <Menu />
@@ -21,11 +21,11 @@ const Home = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUse
 
 export const getServerSideProps: GetServerSideProps = async (context) => await initCageballSsr(context);
 
-Home.layoutProps = {
+HomePage.layoutProps = {
   meta: {
-    title: "Home",
+    title: "Joga Bonito",
   },
   Layout: AuthenticatedLayout,
 };
 
-export default Home;
+export default HomePage;

@@ -33,6 +33,10 @@ export const authOptions: NextAuthOptions = {
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/sign-in",
+    verifyRequest: "/verify-request",
+  },
 };
 
 export default NextAuth(authOptions);
