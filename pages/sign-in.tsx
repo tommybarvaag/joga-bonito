@@ -54,8 +54,21 @@ const SignInPage = ({ csrfToken }: { csrfToken: string }) => {
   );
 };
 
+const isUUID = (sessionCookie: string) => {
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return isUUID.test(sessionCookie);
+};
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const csrfToken = await getCsrfToken(context);
+
+  // Clean invalid next-auth session cookies
+  (Object.keys(context.req.cookies) ?? []).forEach((name) => {
+    if (name?.indexOf("next-auth.session-token") > -1 && !isUUID(context.req.cookies[name])) {
+      context.res.setHeader("Set-Cookie", `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;`);
+    }
+  });
+
   return {
     props: { csrfToken },
   };

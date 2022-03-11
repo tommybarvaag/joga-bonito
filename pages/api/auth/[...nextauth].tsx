@@ -37,6 +37,9 @@ export const authOptions: NextAuthOptions = {
     signIn: "/sign-in",
     verifyRequest: "/verify-request",
   },
+  session: {
+    strategy: "database",
+  },
 };
 
 export default NextAuth(authOptions);
