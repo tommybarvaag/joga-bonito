@@ -5,6 +5,21 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "@joga-bonito/web#build": {
+      "dependsOn": [
+        "^build",
+        "$BASE_URL",
+        "$NEXTAUTH_URL",
+        "$NEXTAUTH_SECRET",
+        "$EMAIL_SERVER_HOST",
+        "$EMAIL_SERVER_PORT",
+        "$EMAIL_SERVER_USER",
+        "$EMAIL_FROM",
+        "$EMAIL_SERVER_PASSWORD",
+        "$DATABASE_URL"
+      ],
+      "outputs": [".next/**"]
+    },
     "test": {
       "outputs": []
     },

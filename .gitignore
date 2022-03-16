@@ -10,6 +10,10 @@
 
 # production
 /build
+dist
+dist-ssr
+server/dist
+public/dist
 
 # misc
 .DS_Store
@@ -32,3 +36,4 @@ yarn-error.log*
 
 # turbo
 .turbo
+
