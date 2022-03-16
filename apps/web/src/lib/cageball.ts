@@ -1,5 +1,5 @@
-import { CageballData, CageballDate, JSONResponse, Unpacked } from "@/types";
 import { dateNextWeek, formatCageballEventDateAndTime, formatYmd } from "@/utils/date";
+import { CageballData, CageballDate, JSONResponse, Unpacked } from "@joga-bonito/types";
 import { Prisma } from "@prisma/client";
 import { getISOWeek } from "date-fns";
 import prisma from "./prisma";

@@ -1,4 +1,4 @@
-import { Unpacked } from "@/types";
+import { Unpacked } from "@joga-bonito/types";
 import { Prisma, Vote } from "@prisma/client";
 import prisma from "./prisma";
 

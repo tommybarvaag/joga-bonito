@@ -15,12 +15,11 @@
     "jsx": "preserve",
     "incremental": true,
     "strictNullChecks": false,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
       "@/components/*": ["components/*"],
       "@/constants/*": ["constants/*"],
       "@/lib/*": ["lib/*"],
-      "@/types": ["types/index"],
       "@/utils/*": ["utils/*"]
     }
   },

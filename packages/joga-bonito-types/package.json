@@ -1,0 +1,12 @@
+{
+  "name": "@joga-bonito/types",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

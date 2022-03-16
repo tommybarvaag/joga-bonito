@@ -6,7 +6,11 @@
 .pnp.js
 
 # testing
-/coverages
+/coverage
+
+# next.js
+/.next/
+/out/
 
 # production
 /build
@@ -26,6 +30,9 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# vercel
+.vercel
 
 # typescript
 *.tsbuildinfo
