@@ -3,7 +3,7 @@ import { Button, Card, Svg } from "@/components/ui";
 import { useUser } from "@/components/user";
 import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
-import { UserVote } from "@/types";
+import { UserVote } from "@joga-bonito/types";
 import { Vote } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import * as React from "react";

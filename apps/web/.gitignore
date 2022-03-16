@@ -5,20 +5,15 @@
 /.pnp
 .pnp.js
 
-# next.js
-.next/
-out/
-build
-
 # testing
-/coverages
+/coverage
+
+# next.js
+/.next/
+/out/
 
 # production
 /build
-dist
-dist-ssr
-server/dist
-public/dist
 
 # misc
 .DS_Store
@@ -36,22 +31,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# typescript
-*.tsbuildinfo
-
-# turbo
-.turbo
-
 # vercel
 .vercel
 
-# VisualStudioCode template
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-
-# Local History for Visual Studio Code
-.history/
+# typescript
+*.tsbuildinfo
