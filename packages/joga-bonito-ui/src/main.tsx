@@ -1,6 +1,6 @@
 import { styled } from "./stitches.config";
 
-const Main = styled("main", {
+export const Main = styled("main", {
   // Reset
   boxSizing: "border-box",
   flexShrink: 0,
@@ -10,5 +10,3 @@ const Main = styled("main", {
   maxWidth: "$lgContainer",
   margin: "0 auto",
 });
-
-export default Main;

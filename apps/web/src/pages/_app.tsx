@@ -1,10 +1,11 @@
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
-import { darkTheme, globalCss } from "@joga-bonito/ui";
+import { darkTheme } from "@joga-bonito/ui";
 import { NextComponentType, NextPageContext } from "next";
 import { Session } from "next-auth";
 import { ThemeProvider } from "next-themes";
 import * as React from "react";
 import { ReactNode } from "react";
+import { globalCss } from "stitches.config";
 
 type MyAppProps = {
   Component: NextComponentType<NextPageContext, any, {}> & {

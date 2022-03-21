@@ -1,6 +1,6 @@
-import { getCssText } from "@joga-bonito/ui";
 import { Head, Html, Main, NextScript } from "next/document";
 import * as React from "react";
+import { getCssText } from "stitches.config";
 
 const Document = () => {
   return (
