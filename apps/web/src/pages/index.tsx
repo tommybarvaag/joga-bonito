@@ -1,9 +1,9 @@
 import { Menu } from "@/components/nav";
-import { Heading, Main } from "@/components/ui";
+import { Heading } from "@/components/ui";
 import { AuthenticatedLayout, UserVotes } from "@/components/user";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { initCageballSsr } from "@/utils/page";
-import { Button } from "@joga-bonito/core";
+import { Main } from "@joga-bonito/ui";
 import { getISOWeek } from "date-fns";
 import type { GetServerSideProps } from "next";
 import * as React from "react";
@@ -11,7 +11,6 @@ import * as React from "react";
 const HomePage = ({ cageballEvents }: { cageballEvents: CageballEventWithVotesAndUser[] }) => {
   return (
     <>
-      <Button>Core</Button>
       <Menu />
       <Main>
         <Heading size="3">{`Stem for uke ${getISOWeek(new Date()) + 1}`}</Heading>

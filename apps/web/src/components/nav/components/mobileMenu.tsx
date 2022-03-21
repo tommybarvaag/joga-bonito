@@ -1,11 +1,11 @@
 import { ThemeSelect } from "@/components/theme";
 import { Button, Dialog, DialogContent, DialogTitle, DialogTrigger, Flex, IconButton, Nav, Svg } from "@/components/ui";
 import { useUser } from "@/components/user";
+import { CSS } from "@joga-bonito/ui";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useDrag } from "@use-gesture/react";
 import { signIn, signOut } from "next-auth/react";
 import * as React from "react";
-import { CSS } from "stitches.config";
 
 const MobileMenu = ({ ...other }: { css?: CSS }) => {
   const { user } = useUser();

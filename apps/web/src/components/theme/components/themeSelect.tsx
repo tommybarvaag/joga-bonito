@@ -1,8 +1,8 @@
 import { IconButton, Svg } from "@/components/ui";
+import { CSS } from "@joga-bonito/ui";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import * as React from "react";
-import { CSS } from "stitches.config";
 
 const ThemeSelect = ({ ...other }: { css?: CSS }) => {
   const { theme, setTheme } = useTheme();

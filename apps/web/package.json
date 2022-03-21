@@ -11,6 +11,7 @@
   "dependencies": {
     "@joga-bonito/core": "*",
     "@joga-bonito/types": "*",
+    "@joga-bonito/ui": "*",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.10.0",
     "@radix-ui/colors": "^0.1.8",

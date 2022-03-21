@@ -3,9 +3,9 @@ import { MobileMenu } from "@/components/nav";
 import { ThemeSelect } from "@/components/theme";
 import { Button, Flex, Link, Nav, Svg } from "@/components/ui";
 import { useUser } from "@/components/user";
+import { CSS } from "@joga-bonito/ui";
 import { signIn, signOut } from "next-auth/react";
 import * as React from "react";
-import { CSS } from "stitches.config";
 
 const Menu = ({ ...other }: { css?: CSS }) => {
   const { user } = useUser();
