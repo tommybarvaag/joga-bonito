@@ -1,4 +1,4 @@
-import { keyframes } from "stitches.config";
+import { keyframes } from "./stitches.config";
 
 export const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(20px)" },

@@ -1,9 +1,9 @@
 import { Logo } from "@/components/assets";
 import { MobileMenu } from "@/components/nav";
 import { ThemeSelect } from "@/components/theme";
-import { Button, Flex, Link, Nav, Svg } from "@/components/ui";
+import { Link } from "@/components/ui";
 import { useUser } from "@/components/user";
-import { CSS } from "@joga-bonito/ui";
+import { Button, CSS, Flex, Nav, Svg } from "@joga-bonito/ui";
 import { signIn, signOut } from "next-auth/react";
 import * as React from "react";
 

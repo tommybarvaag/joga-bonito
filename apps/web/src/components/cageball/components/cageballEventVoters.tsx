@@ -1,7 +1,7 @@
-import { Box, Button, Heading, Text } from "@/components/ui";
-import Popover, { PopoverArrow, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from "@/components/ui";
 import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
+import { Box, Button, Heading, Text } from "@joga-bonito/ui";
 import * as React from "react";
 
 const CageballEventVoters = ({

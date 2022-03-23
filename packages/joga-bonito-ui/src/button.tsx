@@ -1,4 +1,4 @@
-import { css, styled } from "stitches.config";
+import { css, styled } from "./stitches.config";
 
 export const buttonStyles = css({
   // Reset
@@ -109,6 +109,4 @@ export const buttonStyles = css({
   },
 });
 
-const Button = styled("button", buttonStyles);
-
-export default Button;
+export const Button = styled("button", buttonStyles);

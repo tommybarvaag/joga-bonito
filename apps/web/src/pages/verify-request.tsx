@@ -1,4 +1,4 @@
-import { Heading, Main, Paragraph } from "@/components/ui";
+import { Heading, Main, Paragraph } from "@joga-bonito/ui";
 import * as React from "react";
 
 const VerifyRequestPage = () => {

@@ -1,7 +1,7 @@
 import merge from "lodash.merge";
 import React from "react";
-import { CSS, VariantProps } from "stitches.config";
-import Text from "./text";
+import { CSS, VariantProps } from "./stitches.config";
+import { Text } from "./text";
 
 const DEFAULT_TAG = "h1";
 
@@ -10,7 +10,7 @@ type HeadingSizeVariants = "1" | "2" | "3" | "4" | "5";
 type HeadingVariants = { size?: HeadingSizeVariants; noMargin?: boolean } & Omit<VariantProps<typeof Text>, "size">;
 export type HeadingProps = React.ComponentProps<typeof DEFAULT_TAG> & HeadingVariants & { css?: CSS; as?: any };
 
-const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingProps>((props, forwardedRef) => {
+export const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingProps>((props, forwardedRef) => {
   // '2' here is the default heading size variant
   const { size = "1", noMargin = false, ...textProps } = props;
   // This is the mapping of Heading Variants to Text variants
@@ -47,5 +47,3 @@ const Heading = React.forwardRef<React.ElementRef<typeof DEFAULT_TAG>, HeadingPr
 Heading.displayName = "Heading";
 
 Heading.toString = () => ".heading";
-
-export default Heading;

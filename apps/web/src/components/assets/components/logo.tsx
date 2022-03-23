@@ -1,4 +1,4 @@
-import { Path } from "@/components/ui";
+import { Path } from "@joga-bonito/ui";
 import * as React from "react";
 
 const Logo = ({ ...other }) => (

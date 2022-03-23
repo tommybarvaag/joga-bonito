@@ -1,6 +1,6 @@
-import { styled } from "stitches.config";
+import { styled } from "./stitches.config";
 
-const Container = styled("div", {
+export const Container = styled("div", {
   // Reset
   boxSizing: "border-box",
   flexShrink: 0,
@@ -34,5 +34,3 @@ const Container = styled("div", {
     size: "full",
   },
 });
-
-export default Container;

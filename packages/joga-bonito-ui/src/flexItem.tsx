@@ -1,7 +1,7 @@
-import { styled } from "stitches.config";
-import Flex from "./flex";
+import { Flex } from "./flex";
+import { styled } from "./stitches.config";
 
-const FlexItem = styled(Flex, {
+export const FlexItem = styled(Flex, {
   boxSizing: "border-box",
   display: "flex",
 
@@ -107,5 +107,3 @@ const FlexItem = styled(Flex, {
     flexDirection: "column",
   },
 });
-
-export default FlexItem;

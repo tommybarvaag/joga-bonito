@@ -1,5 +1,5 @@
 import { Menu } from "@/components/nav";
-import { Heading } from "@/components/ui";
+import { Heading } from "@joga-bonito/ui";
 import { AuthenticatedLayout, UserVotes } from "@/components/user";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { initCageballSsr } from "@/utils/page";

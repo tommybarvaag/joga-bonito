@@ -1,8 +1,8 @@
-import { styled } from "stitches.config";
-import Svg from "./svg";
-import Text from "./text";
+import { styled } from "./stitches.config";
+import { Svg } from "./svg";
+import { Text } from "./text";
 
-const IconButton = styled("button", {
+export const IconButton = styled("button", {
   // Reset
   alignItems: "center",
   appearance: "none",
@@ -81,5 +81,3 @@ const IconButton = styled("button", {
     size: "2",
   },
 });
-
-export default IconButton;

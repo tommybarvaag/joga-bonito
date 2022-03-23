@@ -1,6 +1,6 @@
+import { styled } from "@joga-bonito/ui";
 import NextImage from "next/image";
-import { styled } from "stitches.config";
 
-const Image = styled(NextImage, {});
+const Image = styled(NextImage);
 
 export default Image;

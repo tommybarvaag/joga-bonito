@@ -1,6 +1,6 @@
-import { styled } from "stitches.config";
+import { styled } from "./stitches.config";
 
-const Svg = styled("svg", {
+export const Svg = styled("svg", {
   variants: {
     size: {
       1: {
@@ -58,5 +58,3 @@ const Svg = styled("svg", {
     variant: "gray",
   },
 });
-
-export default Svg;

@@ -5,7 +5,7 @@ import { Session } from "next-auth";
 import { ThemeProvider } from "next-themes";
 import * as React from "react";
 import { ReactNode } from "react";
-import { globalCss } from "stitches.config";
+import { globalCss } from "@joga-bonito/ui";
 
 type MyAppProps = {
   Component: NextComponentType<NextPageContext, any, {}> & {

@@ -1,5 +1,7 @@
 import { Logo } from "@/components/assets";
-import { Button, Fieldset, Form, Input, Label, Main, Svg } from "@/components/ui";
+import { Label } from "@/components/ui";
+import { Button, Fieldset, Form, Input, Main, Svg } from "@joga-bonito/ui";
+
 import { GetServerSideProps } from "next";
 import { getCsrfToken } from "next-auth/react";
 import * as React from "react";

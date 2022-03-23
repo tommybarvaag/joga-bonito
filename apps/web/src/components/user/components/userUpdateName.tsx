@@ -1,5 +1,5 @@
-import { Button, Fieldset, Flex, Form, Heading, Input, Label } from "@/components/ui";
 import { useUser } from "@/components/user";
+import { Button, Fieldset, Flex, Form, Heading, Input, Label } from "@joga-bonito/ui";
 import * as React from "react";
 
 const UserUpdateName = () => {

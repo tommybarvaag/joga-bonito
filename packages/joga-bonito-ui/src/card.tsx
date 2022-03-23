@@ -1,6 +1,6 @@
-import { styled } from "stitches.config";
+import { styled } from "./stitches.config";
 
-const Card = styled("div", {
+export const Card = styled("div", {
   appearance: "none",
   boxShadow: "$card",
   boxSizing: "border-box",
@@ -37,5 +37,3 @@ const Card = styled("div", {
     padding: "small",
   },
 });
-
-export default Card;

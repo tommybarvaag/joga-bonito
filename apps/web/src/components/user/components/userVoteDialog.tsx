@@ -1,9 +1,9 @@
 import { CageballEventVoters } from "@/components/cageball";
-import { Button, Dialog, DialogContent, DialogTrigger } from "@/components/ui";
 import { useUser } from "@/components/user";
 import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { formatCageballEventTime } from "@/utils/date";
+import { Button, Dialog, DialogContent, DialogTrigger } from "@joga-bonito/ui";
 import { Vote } from "@prisma/client";
 import * as React from "react";
 

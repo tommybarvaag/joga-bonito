@@ -1,11 +1,12 @@
+import { CSS, styled, VariantProps } from "@joga-bonito/ui";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import * as React from "react";
-import { CSS, styled, VariantProps } from "stitches.config";
 
 const LinkRoot = styled("a", {
   textDecoration: "none",
   transition: "color 0.2s ease-in-out",
   color: "$text",
+  length: undefined,
 });
 
 type LinkProps = VariantProps<typeof LinkRoot> & {

@@ -1,6 +1,6 @@
-import { styled } from "stitches.config";
+import { styled } from "./stitches.config";
 
-const Nav = styled("nav", {
+export const Nav = styled("nav", {
   padding: "$2 $4",
   width: "100%",
   minHeight: "75px",
@@ -13,5 +13,3 @@ const Nav = styled("nav", {
     },
   },
 });
-
-export default Nav;

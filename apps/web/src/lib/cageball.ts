@@ -51,7 +51,8 @@ export const getCageball = async (weekNumber?: number, oneInstancePerDateSlot = 
 export const importCageballData = async (weekNumber?: number): Promise<CageballEventWithVotesAndUser[]> => {
   const cageball = await getCageball(weekNumber);
 
-  const collection = await prisma.$transaction(
+  // Remove await to test "fire and forget" with github actions
+  const collection = prisma.$transaction(
     cageball.map((cur) =>
       prisma.cageballEvent.upsert({
         where: { formattedToFromDate: cur.formattedToFromDate },
@@ -71,7 +72,17 @@ export const importCageballData = async (weekNumber?: number): Promise<CageballE
     )
   );
 
-  return collection.map((item) => ({ ...item, votes: [] }));
+  // Return mapped data while "fire and forget" action is running
+  return cageball.map((cur) => ({
+    available: cur.available,
+    bookable: cur.bookable,
+    formattedToFromDate: cur.formattedToFromDate,
+    from: new Date(cur.from),
+    to: new Date(cur.to),
+    weekNumber: getISOWeek(new Date(cur.from)),
+    id: "",
+    votes: [],
+  }));
 };
 
 const getCageballEventsWithVotesAndUser = async (weekNumber?: number) =>
@@ -107,7 +118,7 @@ export const getCageballEvents = async (weekNumber?: number): Promise<CageballEv
 
   return (
     events
-      ?.filter((event) => event.from.getUTCDay() < 5 && event.from.getUTCHours() > 17 && event.to.getUTCHours() < 22)
+      ?.filter((event) => event.from.getUTCDay() < 5 && event.from.getHours() > 18 && event.to.getHours() < 22)
       ?.sort((a, b) => a.from.getTime() - b.from.getTime()) ?? []
   );
 };

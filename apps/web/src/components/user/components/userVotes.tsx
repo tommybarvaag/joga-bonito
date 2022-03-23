@@ -1,6 +1,6 @@
-import { Box, Grid, Heading, Text } from "@/components/ui";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { formatDay } from "@/utils/date";
+import { Box, Grid, Heading, Text } from "@joga-bonito/ui";
 import * as React from "react";
 import { UserVote, UserVoteDialog } from ".";
 

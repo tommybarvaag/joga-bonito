@@ -1,4 +1,6 @@
-import { Box, Heading, Link, Main } from "@/components/ui";
+import { Link } from "@/components/ui";
+import { Box, Heading, Main } from "@joga-bonito/ui";
+
 import * as React from "react";
 
 const Custom404 = ({}: {}) => {

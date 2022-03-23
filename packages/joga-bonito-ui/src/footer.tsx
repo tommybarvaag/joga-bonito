@@ -1,6 +1,6 @@
-import { styled } from "stitches.config";
+import { styled } from "./stitches.config";
 
-const Footer = styled("footer", {
+export const Footer = styled("footer", {
   // Reset
   boxSizing: "border-box",
   flexShrink: 0,
@@ -15,5 +15,3 @@ const Footer = styled("footer", {
     },
   },
 });
-
-export default Footer;

@@ -1,5 +1,4 @@
-import { IconButton, Svg } from "@/components/ui";
-import { CSS } from "@joga-bonito/ui";
+import { CSS, IconButton, Svg } from "@joga-bonito/ui";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import * as React from "react";

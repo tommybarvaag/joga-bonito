@@ -6,7 +6,8 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {
     "@joga-bonito/core": "*",
@@ -15,16 +16,13 @@
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.10.0",
     "@radix-ui/colors": "^0.1.8",
-    "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-label": "^0.1.5",
     "@radix-ui/react-popover": "^0.1.6",
-    "@stitches/react": "^1.2.7",
     "@types/lodash.debounce": "^4.0.6",
     "@use-gesture/react": "^10.2.9",
     "date-fns": "^2.28.0",
     "lodash.debounce": "^4.0.8",
-    "lodash.merge": "^4.6.2",
     "next": "12.1.0",
     "next-auth": "^4.2.1",
     "next-themes": "^0.0.15",

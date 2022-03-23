@@ -1,12 +1,12 @@
+import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade, styled } from "@joga-bonito/ui";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { styled } from "stitches.config";
-import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from "./keyframes";
 
 const StyledArrow = styled(PopoverPrimitive.Arrow, {
   fill: "$popover",
   stroke: "$popoverBorder",
   strokeWidth: "2px",
   strokeDasharray: "0 28.5 26",
+  length: undefined,
 });
 
 const StyledContent = styled(PopoverPrimitive.Content, {
@@ -39,6 +39,7 @@ const StyledContent = styled(PopoverPrimitive.Content, {
       },
     },
   },
+  length: undefined,
 });
 
 const StyledClose = styled(PopoverPrimitive.Close, {
@@ -46,6 +47,7 @@ const StyledClose = styled(PopoverPrimitive.Close, {
   position: "absolute",
   top: 5,
   right: 5,
+  length: undefined,
 });
 
 // Exports

@@ -1,9 +1,9 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import React from "react";
-import { CSS, styled } from "stitches.config";
 import { modalHide, modalShow } from "./keyframes";
 import { overlayStyles } from "./overlay";
 import { panelStyles } from "./panel";
+import { CSS, styled } from "./stitches.config";
 
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   children: React.ReactNode;
@@ -24,9 +24,10 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
   '&[data-state="closed"]': {
     opacity: 0,
   },
+  length: undefined,
 });
 
-const Dialog = ({ children, ...props }: DialogProps) => {
+export const Dialog = ({ children, ...props }: DialogProps) => {
   return (
     <DialogPrimitive.Root {...props}>
       <StyledOverlay />
@@ -59,12 +60,14 @@ const StyledContent = styled(DialogPrimitive.Content, panelStyles, {
     transform: "translate3d(0,100%,0)",
     animation: `${modalHide} .2s cubic-bezier(.05,.86,.47,1.02)`,
   },
+  length: undefined,
 });
 
 const StyledCloseButton = styled(DialogPrimitive.Close, {
   position: "absolute",
   top: "$5",
   right: "$5",
+  length: undefined,
 });
 
 const StyledDialogTitle = styled(DialogPrimitive.Title, {
@@ -73,11 +76,13 @@ const StyledDialogTitle = styled(DialogPrimitive.Title, {
   "@bp1": {
     fontSize: "$6",
   },
+  length: undefined,
 });
 
 const StyledDialogDescription = styled(DialogPrimitive.Description, {
   fontSize: "$3",
   marginBottom: "$3",
+  length: undefined,
 });
 
 type DialogContentPrimitiveProps = React.ComponentProps<typeof DialogPrimitive.Content>;
@@ -95,8 +100,6 @@ export const DialogContent = React.forwardRef<React.ElementRef<typeof StyledCont
 ));
 
 DialogContent.displayName = "DialogContent";
-
-export default Dialog;
 
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
