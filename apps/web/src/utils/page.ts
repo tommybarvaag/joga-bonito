@@ -20,16 +20,7 @@ export const initCageballSsr: GetServerSideProps = async (context) => {
 
   const weekNumber = +(context.params?.weekNumber ?? getISOWeek(new Date()) + 1);
 
-  const cageballEvents = (await getCageballEvents(weekNumber)).map(({ from, to, votes, ...other }) => ({
-    ...other,
-    from: from.toISOString(),
-    to: to.toISOString(),
-    votes: (votes ?? []).map((vote) => ({
-      ...vote,
-      createdAt: vote.createdAt.toISOString(),
-      updatedAt: vote.updatedAt.toISOString(),
-    })),
-  }));
+  console.log("week number", weekNumber);
 
   return {
     props: {
@@ -42,7 +33,16 @@ export const initCageballSsr: GetServerSideProps = async (context) => {
         },
       },
       weekNumber,
-      cageballEvents,
+      cageballEvents: (await getCageballEvents(weekNumber)).map(({ from, to, votes, ...other }) => ({
+        ...other,
+        from: from.toISOString(),
+        to: to.toISOString(),
+        votes: (votes ?? []).map((vote) => ({
+          ...vote,
+          createdAt: vote.createdAt.toISOString(),
+          updatedAt: vote.updatedAt.toISOString(),
+        })),
+      })),
     },
   };
 };
