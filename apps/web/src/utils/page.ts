@@ -20,8 +20,6 @@ export const initCageballSsr: GetServerSideProps = async (context) => {
 
   const weekNumber = +(context.params?.weekNumber ?? getISOWeek(new Date()) + 1);
 
-  console.log("week number", weekNumber);
-
   return {
     props: {
       session: {
