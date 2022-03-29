@@ -1,7 +1,6 @@
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
 import { formatCageballEventDateAndTime } from "@/utils/date";
 import { Text } from "@joga-bonito/ui";
-import { CageballEvent } from "@prisma/client";
 import * as React from "react";
 
 const CageballEvent = ({ cageballEvent }: { cageballEvent: CageballEventWithVotesAndUser }) => {

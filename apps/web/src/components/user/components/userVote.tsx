@@ -2,7 +2,6 @@ import { CageballEvent, CageballEventVoters } from "@/components/cageball";
 import { useUser } from "@/components/user";
 import { useVote } from "@/components/vote";
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
-import { UserVote } from "@joga-bonito/types";
 import { Button, Card, Svg } from "@joga-bonito/ui";
 import { Vote } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
