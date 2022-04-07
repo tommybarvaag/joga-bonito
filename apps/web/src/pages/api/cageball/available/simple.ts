@@ -9,7 +9,7 @@ export default async function Cageball(req: NextApiRequest, res: NextApiResponse
       .json(
         ((await getCageballEvents()) ?? [])
           .filter((event) => event.available && event.bookable)
-          .map(({ from }) => `${formatDay(from)} ${formatCageballEventDateAndTime(from)}`)
+          .map(({ from }) => `${formatDay(new Date(from))} ${formatCageballEventDateAndTime(new Date(from))}`)
       );
   }
 
