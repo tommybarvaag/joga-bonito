@@ -1,18 +1,17 @@
 import { CageballEventWithVotesAndUser } from "@/lib/cageball";
-import { darkTheme } from "@joga-bonito/ui";
-import { NextComponentType, NextPageContext } from "next";
+import { darkTheme, globalCss } from "@joga-bonito/ui";
 import { Session } from "next-auth";
 import { ThemeProvider } from "next-themes";
+import { AppProps } from "next/app";
 import * as React from "react";
 import { ReactNode } from "react";
-import { globalCss } from "@joga-bonito/ui";
 
-type MyAppProps = {
-  Component: NextComponentType<NextPageContext, any, {}> & {
+type MyAppProps = AppProps & {
+  Component: AppProps["Component"] & {
     layoutProps?: any;
   };
-  pageProps?: {
-    children: ReactNode;
+  pageProps?: AppProps["pageProps"] & {
+    children?: ReactNode;
     session?: Session;
     cageballEvents?: CageballEventWithVotesAndUser[];
   };

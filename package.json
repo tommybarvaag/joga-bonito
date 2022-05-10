@@ -11,7 +11,7 @@
     "clean": "turbo run clean"
   },
   "devDependencies": {
-    "turbo": "^1.1.10"
+    "turbo": "^1.2.8"
   },
   "engines": {
     "npm": ">=7.0.0",
