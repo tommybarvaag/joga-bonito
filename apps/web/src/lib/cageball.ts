@@ -52,7 +52,7 @@ export const importCageballData = async (weekNumber?: number): Promise<CageballE
   const cageball = await getCageball(weekNumber);
 
   // Remove await to test "fire and forget" with github actions
-  const collection = prisma.$transaction(
+  const collection = await prisma.$transaction(
     cageball.map((cur) =>
       prisma.cageballEvent.upsert({
         where: { formattedToFromDate: cur.formattedToFromDate },
